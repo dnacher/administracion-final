@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 30/08/2016 05:05:41 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelo.Monto" table="monto" catalog="administracion" optimistic-lock="version">
+        <id name="idMonto" type="int">
+            <column name="idMonto" />
+            <generator class="assigned" />
+        </id>
+        <property name="tipoMonto" type="string">
+            <column name="TipoMonto" length="45" />
+        </property>
+        <property name="valorPesos" type="java.lang.Integer">
+            <column name="ValorPesos" />
+        </property>
+        <property name="activo" type="java.lang.Boolean">
+            <column name="Activo" />
+        </property>
+        <property name="fechaActualizacion" type="date">
+            <column name="FechaActualizacion" length="10" />
+        </property>
+        <set name="convenios" table="convenio" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Monto_idMonto" not-null="true" />
+            </key>
+            <one-to-many class="modelo.Convenio" />
+        </set>
+        <set name="gastoscomuneses" table="gastoscomunes" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Monto_idMonto" not-null="true" />
+            </key>
+            <one-to-many class="modelo.Gastoscomunes" />
+        </set>
+        <set name="otrosgastoses" table="otrosgastos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Monto_idMonto" not-null="true" />
+            </key>
+            <one-to-many class="modelo.Otrosgastos" />
+        </set>
+        <set name="notacreditos" table="notacredito" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Monto_idMonto" not-null="true" />
+            </key>
+            <one-to-many class="modelo.Notacredito" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 30/08/2016 05:05:41 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelo.Tipobonificacion" table="tipobonificacion" catalog="administracion" optimistic-lock="version">
+        <id name="idTipoBonificacion" type="int">
+            <column name="idTipoBonificacion" />
+            <generator class="assigned" />
+        </id>
+        <property name="tipoBonificacion" type="java.lang.Boolean">
+            <column name="TipoBonificacion" />
+        </property>
+        <property name="monto" type="java.lang.Integer">
+            <column name="Monto" />
+        </property>
+        <set name="convenios" table="convenio" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="TipoBonificacion_idTipoBonificacion" not-null="true" />
+            </key>
+            <one-to-many class="modelo.Convenio" />
+        </set>
+    </class>
+</hibernate-mapping>

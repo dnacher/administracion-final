@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="681.0" prefWidth="529.0" styleClass="paneMalvinAlto" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.GastosComunes2Controller">
+    <stylesheets>
+        <URL value="@styles.css" />
+    </stylesheets>
+   <children>
+      <Button fx:id="BtnA" layoutX="56.0" layoutY="136.0" mnemonicParsing="false" onAction="#BlockA" prefHeight="25.0" prefWidth="124.0" rotate="67.0" text="Block A" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Button>
+      <Button fx:id="BtnB" layoutX="92.0" layoutY="263.0" mnemonicParsing="false" onAction="#BlockB" prefHeight="25.0" prefWidth="124.0" rotate="65.0" text="Block B">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Button>
+      <Button fx:id="BtnC" layoutX="190.0" layoutY="375.0" mnemonicParsing="false" onAction="#BlockC" prefHeight="25.0" prefWidth="124.0" rotate="60.0" text="Block C">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Button>
+      <Button fx:id="BtnD" layoutX="240.0" layoutY="522.0" mnemonicParsing="false" onAction="#BlockD" prefHeight="25.0" prefWidth="107.0" rotate="60.0" text="Block D">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Button>
+      <Button fx:id="BtnCambiarVIsta" layoutX="402.0" layoutY="26.0" mnemonicParsing="false" onAction="#CambiarVista" prefHeight="77.0" prefWidth="56.0" styleClass="refreshButton" />
+      <ComboBox fx:id="CmbTorre" layoutX="327.0" layoutY="162.0" onAction="#TorreCambia" prefWidth="150.0" promptText="Torre" />
+      <Button fx:id="BtnAceptar" layoutX="142.0" layoutY="642.0" mnemonicParsing="false" onAction="#Aceptar" prefHeight="25.0" prefWidth="85.0" text="Aceptar" />
+      <Button fx:id="BtnCancelar" layoutX="291.0" layoutY="642.0" mnemonicParsing="false" onAction="#Cancelar" prefHeight="25.0" prefWidth="85.0" text="Cancelar" />
+      <Button fx:id="BtnE" layoutX="340.0" layoutY="496.0" mnemonicParsing="false" onAction="#BlockE" prefHeight="25.0" prefWidth="107.0" rotate="-32.0" text="Block E">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

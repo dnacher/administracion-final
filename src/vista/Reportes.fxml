@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="197.0" prefWidth="274.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.ReportesController">
+   <children>
+      <ComboBox fx:id="CmbReportes" layoutX="42.0" layoutY="51.0" onAction="#cambiaReportes" prefHeight="25.0" prefWidth="185.0" />
+      <Button layoutX="53.0" layoutY="126.0" mnemonicParsing="false" onAction="#Aceptar" prefHeight="25.0" prefWidth="68.0" text="Aceptar" />
+      <Button fx:id="BtnCancelar" layoutX="146.0" layoutY="126.0" mnemonicParsing="false" onAction="#Cancelar" prefHeight="25.0" prefWidth="68.0" text="Cancelar" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="53.0" layoutY="9.0" prefHeight="27.0" prefWidth="160.0" text="Reportes" textAlignment="CENTER">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="LblInfo" layoutX="28.0" layoutY="166.0" prefHeight="17.0" prefWidth="210.0" />
+   </children>
+</AnchorPane>

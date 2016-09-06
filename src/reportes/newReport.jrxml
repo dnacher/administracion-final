@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="79e96a33-0cf7-4a20-bc8d-818d3518f1c8">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select * from usuario]]>
+	</queryString>
+	<field name="idUsuario" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="NombreUsuario" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Password" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TipoUsuario_idTipoUsuario" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="80" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="25" width="555" height="37" uuid="ae3d7278-323b-46c9-b7e2-1a91adaffa3d"/>
+				<textElement textAlignment="Center">
+					<font size="24"/>
+				</textElement>
+				<text><![CDATA[Grafica]]></text>
+			</staticText>
+		</band>
+	</title>
+	<summary>
+		<band height="224" splitType="Stretch">
+			<barChart>
+				<chart>
+					<reportElement mode="Opaque" x="33" y="24" width="227" height="181" backcolor="#666666" uuid="ea5bf50c-5849-4e77-81f7-d71a1bcc185b"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA[""]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{NombreUsuario}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{idUsuario}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot>
+						<seriesColor seriesOrder="0" color="#CC0000"/>
+						<seriesColor seriesOrder="1" color="#00CC00"/>
+						<seriesColor seriesOrder="2" color="#FFFF33"/>
+						<seriesColor seriesOrder="3" color="#000000"/>
+					</plot>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
+			<pieChart>
+				<chart>
+					<reportElement mode="Opaque" x="282" y="24" width="260" height="181" backcolor="#666666" uuid="f4b9ca69-68a6-482c-b599-cb6c66b8f63b"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<pieDataset>
+					<keyExpression><![CDATA[$F{NombreUsuario}]]></keyExpression>
+					<valueExpression><![CDATA[$F{idUsuario}]]></valueExpression>
+				</pieDataset>
+				<piePlot>
+					<plot>
+						<seriesColor seriesOrder="0" color="#FF3333"/>
+						<seriesColor seriesOrder="1" color="#0000FF"/>
+						<seriesColor seriesOrder="2" color="#009900"/>
+						<seriesColor seriesOrder="3" color="#000000"/>
+						<seriesColor seriesOrder="4" color="#FFFF00"/>
+					</plot>
+					<itemLabel/>
+				</piePlot>
+			</pieChart>
+		</band>
+	</summary>
+</jasperReport>

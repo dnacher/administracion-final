@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 30/08/2016 05:05:41 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelo.Otrosgastos" table="otrosgastos" catalog="administracion" optimistic-lock="version">
+        <id name="idOtrosGastos" type="int">
+            <column name="idOtrosGastos" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="concepto" class="modelo.Concepto" fetch="select">
+            <column name="Concepto_idConcepto" not-null="true" />
+        </many-to-one>
+        <many-to-one name="monto" class="modelo.Monto" fetch="select">
+            <column name="Monto_idMonto" not-null="true" />
+        </many-to-one>
+        <many-to-one name="unidad" class="modelo.Unidad" fetch="select">
+            <column name="Unidad_idUnidad" not-null="true" />
+        </many-to-one>
+        <property name="secuencia" type="java.lang.Integer">
+            <column name="Secuencia" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="Descripcion" length="100" />
+        </property>
+        <property name="monto_1" type="java.lang.Integer">
+            <column name="Monto" />
+        </property>
+        <property name="fecha" type="date">
+            <column name="Fecha" length="10" />
+        </property>
+        <property name="pago" type="java.lang.Boolean">
+            <column name="Pago" />
+        </property>
+    </class>
+</hibernate-mapping>

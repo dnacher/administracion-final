@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 30/08/2016 05:05:41 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelo.Usuario" table="usuario" catalog="administracion" optimistic-lock="version">
+        <id name="idUsuario" type="int">
+            <column name="idUsuario" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="tipousuario" class="modelo.Tipousuario" fetch="select">
+            <column name="TipoUsuario_idTipoUsuario" not-null="true" />
+        </many-to-one>
+        <property name="nombreUsuario" type="string">
+            <column name="NombreUsuario" length="45" />
+        </property>
+        <property name="password" type="string">
+            <column name="Password" length="45" />
+        </property>
+    </class>
+</hibernate-mapping>

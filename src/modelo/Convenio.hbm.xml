@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 30/08/2016 05:05:41 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelo.Convenio" table="convenio" catalog="administracion" optimistic-lock="version">
+        <id name="idConvenio" type="int">
+            <column name="idConvenio" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="monto" class="modelo.Monto" fetch="select">
+            <column name="Monto_idMonto" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tipobonificacion" class="modelo.Tipobonificacion" fetch="select">
+            <column name="TipoBonificacion_idTipoBonificacion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="unidad" class="modelo.Unidad" fetch="select">
+            <column name="Unidad_idUnidad" not-null="true" />
+        </many-to-one>
+        <property name="deudaTotal" type="java.lang.Integer">
+            <column name="DeudaTotal" />
+        </property>
+        <property name="tieneBonificacion" type="java.lang.Boolean">
+            <column name="TieneBonificacion" />
+        </property>
+        <property name="cuotas" type="java.lang.Integer">
+            <column name="Cuotas" />
+        </property>
+        <property name="activo" type="java.lang.Boolean">
+            <column name="Activo" />
+        </property>
+        <property name="saldoInicial" type="java.lang.Integer">
+            <column name="SaldoInicial" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="Descripcion" length="80" />
+        </property>
+    </class>
+</hibernate-mapping>

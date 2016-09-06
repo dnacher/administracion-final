@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="303.0" prefWidth="308.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.CargarMasivasController">
+   <children>
+      <ComboBox fx:id="CmbMasivas" layoutX="48.0" layoutY="77.0" prefHeight="25.0" prefWidth="199.0" />
+      <Label layoutX="15.0" layoutY="36.0" prefHeight="20.0" prefWidth="293.0" text="Elija una opcion para cargar de forma masiva">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Button layoutX="62.0" layoutY="130.0" mnemonicParsing="false" onAction="#Aceptar" prefHeight="25.0" prefWidth="68.0" text="Aceptar" />
+      <Button fx:id="BtnCancelar" layoutX="162.0" layoutY="130.0" mnemonicParsing="false" onAction="#Cancelar" prefHeight="25.0" prefWidth="68.0" text="Cancelar" />
+      <Label fx:id="LblInfo" alignment="CENTER" contentDisplay="CENTER" layoutX="19.0" layoutY="223.0" prefHeight="67.0" prefWidth="245.0" textAlignment="CENTER" wrapText="true" />
+      <ProgressBar fx:id="progressBar" layoutX="40.0" layoutY="182.0" prefWidth="200.0" progress="0.0" />
+      <ProgressIndicator fx:id="progressIndicator" layoutX="247.0" layoutY="171.0" progress="0.0" />
+   </children>
+</AnchorPane>
