@@ -47,7 +47,7 @@ public class PagoGastosComunesController implements Initializable {
          if(mesAcutal){
              try{
              cv= new ControlVentana();
-            cv.crearVentanaMain("GastosComunes2", "Gastos Comunes");
+            cv.crearVentanaMain("Main", "Gastos Comunes");
             Stage stage = (Stage) BtnCancelar.getScene().getWindow();
             stage.close();
              }

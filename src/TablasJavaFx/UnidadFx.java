@@ -1,5 +1,7 @@
 package TablasJavaFx;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -40,6 +42,24 @@ public class UnidadFx {
         this.propietarioInquilino=new SimpleBooleanProperty(unidad.getPropietarioInquilino());
         this.fechaIngreso=new SimpleStringProperty(unidad.getFechaIngreso().toString());
         this.activo=new SimpleBooleanProperty(unidad.getActivo());
+     }
+     
+     public Unidad devuelveUnidad(UnidadFx unidadfx) throws ParseException{ 
+        Unidad unidad= new Unidad();
+        unidad.setIdUnidad(unidadfx.getIdUnidad());        
+        unidad.setBlock(unidadfx.getBlock());
+        unidad.setTorre(unidadfx.getTorre());
+        unidad.setPuerta(unidadfx.getPuerta());
+        unidad.setNombre(unidadfx.getNombre());
+        unidad.setApellido(unidadfx.getApellido());
+        unidad.setTelefono(unidadfx.getTelefono());
+        unidad.setMail(unidadfx.getMail());
+        unidad.setPropietarioInquilino(unidadfx.getPropietarioInquilino());
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = formatter.parse(unidadfx.getFechaIngreso());
+        unidad.setFechaIngreso(date);
+        unidad.setActivo(unidadfx.getActivo());
+        return unidad;
      }
 
     public int getIdUnidad() {

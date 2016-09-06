@@ -1,8 +1,12 @@
 package vista;
 
 import TablasJavaFx.UnidadFx;
+import control.ConfiguracionControl;
 import control.ControlVentana;
+import hibernateControls.GastosComunesControl;
+import hibernateControls.MontosControl;
 import java.net.URL;
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.ResourceBundle;
@@ -19,12 +23,17 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import modelo.Gastoscomunes;
+import modelo.Unidad;
 
 public class FormularioGastosComunesController implements Initializable {
     
     UnidadFx uni;
     URL ur;
     String Periodo="";
+    MontosControl mc=new MontosControl();
+    ConfiguracionControl cc= new ConfiguracionControl();
+    GastosComunesControl gcc= new GastosComunesControl();
            
     @FXML
     private ComboBox<String> CmbMoneda;
@@ -55,12 +64,36 @@ public class FormularioGastosComunesController implements Initializable {
     
     @FXML
     void Aceptar(ActionEvent event) {
+        Gastoscomunes gc= new Gastoscomunes();
+        UnidadFx ufx=new UnidadFx();
+        Unidad unidad=new Unidad();
+        try {
+            unidad=ufx.devuelveUnidad(uni);
+        } catch (ParseException ex) {
+           //***************Agregar Label info
+        }
+        gc.setUnidad(unidad);
+        gc.setPeriodo(Periodo);
+        gc.setMonto_1(Integer.parseInt(TxtMonto.getText()));
+        
+        //trae solo monto en pesos verificar esto.
+        gc.setMonto(mc.TraeMontoPesos());
+        gc.setIdGastosComunes(ConfiguracionControl.traeUltimoId("gastoscomunes"));
+        gc.setFechaPago(ConfiguracionControl.TraeFecha(CmbFechaPago.getValue()));
+        gc.setEstado(2);
+        gc.setBonificacion(true);
+        try {
+            gcc.guardarGastosComunes(gc);
+            ConfiguracionControl.ActualizaId("gastoscomunes");
             control.ControlVentana cv= new ControlVentana();
-            String str="aca una linea "
-                    + "aca otra linea "
-                    + "ultimalinea prueba"
-                    + "aqui forma definitiva del texto";            
+            String str="se ha cargado correctamente";            
+            cv.creaVentanaError(str, "information");
+        }         
+        catch (Exception ex){            
+            control.ControlVentana cv= new ControlVentana();
+            String str="Hubo un error al intentar guardar: " + ex.getMessage();            
             cv.creaVentanaError(str, "error");
+        }            
     }
 
     @FXML
@@ -104,8 +137,6 @@ public class FormularioGastosComunesController implements Initializable {
        }
        else{
            LblMoneda.setText("UI");
-       }
-       
-    }
-    
+       }       
+    }    
 }
