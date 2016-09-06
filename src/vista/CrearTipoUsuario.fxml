@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="345.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="vista.CrearTipoUsuarioController">
+   <children>
+      <Label layoutX="58.0" layoutY="88.0" text="Unidades" />
+      <Label layoutX="19.0" layoutY="125.0" text="Gastos Comunes" />
+      <Label layoutX="52.0" layoutY="199.0" text="Convenios" />
+      <Label layoutX="39.0" layoutY="162.0" text="Otros Gastos" />
+      <Label layoutX="60.0" layoutY="236.0" text="Reportes" />
+      <Label layoutX="45.0" layoutY="273.0" text="Exportacion" />
+      <Label layoutX="43.0" layoutY="310.0" text="Importacion" />
+      <CheckBox fx:id="ChkVerUnidades" layoutX="208.0" layoutY="88.0" mnemonicParsing="false" />
+      <CheckBox fx:id="ChkVerGastosComunes" layoutX="208.0" layoutY="125.0" mnemonicParsing="false" />
+      <CheckBox fx:id="ChkVerOtrosGastos" layoutX="208.0" layoutY="162.0" mnemonicParsing="false" />
+      <CheckBox fx:id="ChkVerConvenios" layoutX="208.0" layoutY="199.0" mnemonicParsing="false" />
+      <CheckBox fx:id="ChkVerReportes" layoutX="208.0" layoutY="236.0" mnemonicParsing="false" />
+      <CheckBox fx:id="ChkVerExportacion" layoutX="208.0" layoutY="273.0" mnemonicParsing="false" />
+      <CheckBox fx:id="ChkVerImportacion" layoutX="208.0" layoutY="310.0" mnemonicParsing="false" />
+      <CheckBox fx:id="ChkModificarImportacion" layoutX="288.0" layoutY="310.0" mnemonicParsing="false" />
+      <CheckBox fx:id="ChkModificarExportacion" layoutX="288.0" layoutY="273.0" mnemonicParsing="false" />
+      <CheckBox fx:id="ChkModificarReportes" layoutX="288.0" layoutY="236.0" mnemonicParsing="false" />
+      <CheckBox fx:id="ChkModificarConvenios" layoutX="288.0" layoutY="199.0" mnemonicParsing="false" />
+      <CheckBox fx:id="ChkModificarOtrosGastos" layoutX="288.0" layoutY="162.0" mnemonicParsing="false" />
+      <CheckBox fx:id="ChkModificarGastosComunes" layoutX="288.0" layoutY="125.0" mnemonicParsing="false" />
+      <CheckBox fx:id="ChkModificarUnidades" layoutX="288.0" layoutY="88.0" mnemonicParsing="false" />
+      <Label layoutX="208.0" layoutY="46.0" text="Ver" />
+      <Label layoutX="270.0" layoutY="46.0" text="Modificar" />
+      <Line endX="210.0" layoutX="116.0" layoutY="75.0" opacity="0.68" startX="-100.0" strokeMiterLimit="20.0" />
+      <TextField fx:id="TxtTipoUsuario" layoutX="16.0" layoutY="42.0" prefHeight="25.0" prefWidth="169.0" promptText="Tipo de Usuario" />
+      <Button fx:id="BtnAceptar" layoutX="93.0" layoutY="343.0" mnemonicParsing="false" onAction="#Aceptar" prefHeight="25.0" prefWidth="65.0" text="Aceptar" />
+      <Button fx:id="BtnCancelar" layoutX="182.0" layoutY="343.0" mnemonicParsing="false" onAction="#Cancelar" prefHeight="25.0" prefWidth="65.0" text="Cancelar" />
+   </children>
+</AnchorPane>
