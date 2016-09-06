@@ -87,7 +87,8 @@ public class FormularioGastosComunesController implements Initializable {
             ConfiguracionControl.ActualizaId("gastoscomunes");
             control.ControlVentana cv= new ControlVentana();
             String str="se ha cargado correctamente";            
-            cv.creaVentanaError(str, "information");
+            cv.creaVentanaError(str, "tick");
+            Cancelar(event);
         }         
         catch (Exception ex){            
             control.ControlVentana cv= new ControlVentana();

@@ -56,6 +56,8 @@ public class MensajeController implements Initializable {
                  return "/vista/imagenes/questionIcon.png";
             case "warning":
                  return "/vista/imagenes/warningIcon.png";
+            case "tick":
+                return "/vista/imagenes/Tick.png";
             default:
                  return "/vista/imagenes/errorIcon.png";        
         }
