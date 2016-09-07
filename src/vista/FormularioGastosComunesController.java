@@ -2,6 +2,7 @@ package vista;
 
 import TablasJavaFx.UnidadFx;
 import control.ConfiguracionControl;
+import control.ControlUtil;
 import control.ControlVentana;
 import hibernateControls.GastosComunesControl;
 import hibernateControls.MontosControl;
@@ -30,7 +31,7 @@ public class FormularioGastosComunesController implements Initializable {
     
     UnidadFx uni;
     URL ur;
-    String Periodo="";
+    String periodo="";
     MontosControl mc=new MontosControl();
     ConfiguracionControl cc= new ConfiguracionControl();
     GastosComunesControl gcc= new GastosComunesControl();
@@ -73,7 +74,7 @@ public class FormularioGastosComunesController implements Initializable {
            //***************Agregar Label info
         }
         gc.setUnidad(unidad);
-        gc.setPeriodo(Periodo);
+        gc.setPeriodo(periodo);
         gc.setMonto_1(Integer.parseInt(TxtMonto.getText()));
         
         //trae solo monto en pesos verificar esto.
@@ -111,11 +112,9 @@ public class FormularioGastosComunesController implements Initializable {
            CmbFechaPago.setValue(LocalDate.now());
            LblUnidad.setAlignment(Pos.CENTER);
            LblUnidad.setText(uni.getNombre() + " " + uni.getApellido() + " - " + uni.getPuerta());
-           int year = Calendar.getInstance().get(Calendar.YEAR);
-           int month=Calendar.getInstance().get(Calendar.MONTH)+1;
-           Periodo=Integer.toString(year) + "-";
-           Periodo=Periodo + Integer.toString(month);           
-           String str= "Periodo: " + Periodo;
+           ControlUtil cu= new ControlUtil();
+           periodo=cu.devuelvePeriodoActual();
+           String str= "Periodo: " + periodo;
            LblPeriodo.setText(str);
        }
        ur=url;
@@ -139,5 +138,5 @@ public class FormularioGastosComunesController implements Initializable {
        else{
            LblMoneda.setText("UI");
        }       
-    }    
+    }  
 }

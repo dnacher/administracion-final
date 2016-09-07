@@ -52,7 +52,7 @@ public class MainController implements Initializable {
       
        cargarComboBlock();
        cargarComboTorre();
-       list=uc.TraeUnidades();       
+       list=uc.TraeUnidadesGastosComunesNoPago();       
                 
        List<UnidadFx> li=ufx.getLista(list);       
        retorno = FXCollections.observableList(li);
@@ -106,7 +106,7 @@ public class MainController implements Initializable {
     public void Mostrar(ActionEvent event) {       
         try{
         LblInfo.setText("");
-        List<Unidad> listaTorreBlock=uc.TraeUnidadesXBlockTorre(CmbBlock.getValue(), CmbTorre.getValue());
+        List<Unidad> listaTorreBlock=uc.TraeUnidadesXBlockTorreNoPago(CmbBlock.getValue(), CmbTorre.getValue());
         List<UnidadFx> li=ufx.getLista(listaTorreBlock);       
         retorno = FXCollections.observableList(li);
         cargaTabla(retorno);
@@ -117,7 +117,7 @@ public class MainController implements Initializable {
     }
     
     public void MostrarTodos(ActionEvent event) {       
-        List<Unidad> listaTotal=uc.TraeUnidades();
+        List<Unidad> listaTotal=uc.TraeUnidadesGastosComunesNoPago();
         List<UnidadFx> li=ufx.getLista(listaTotal);       
         retorno = FXCollections.observableList(li);
         cargaTabla(retorno);

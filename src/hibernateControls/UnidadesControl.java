@@ -3,6 +3,7 @@ package hibernateControls;
 import control.ConfiguracionControl;
 import control.ControlVentana;
 import control.controlXML;
+import java.util.ArrayList;
 import java.util.List;
 import modelo.Unidad;
 import org.hibernate.Query;
@@ -60,8 +61,6 @@ public class UnidadesControl {
         controlXML.creaArchivo(str);        
     }
     
-   
-    
     public boolean permitido(Unidad uni){
         boolean permitido= true;
         SessionFactory sf= NewHibernateUtil.getSessionFactory();
@@ -80,14 +79,20 @@ public class UnidadesControl {
         return permitido;
     }
     
-    public List<Unidad> TraeUnidadesXBlockTorre(String block, int torre){
+    public List<Unidad> TraeUnidadesXBlockTorreNoPago(String block, int torre){
         List<Unidad> lista;
         SessionFactory sf= NewHibernateUtil.getSessionFactory();
         Session session;
         session = sf.openSession();
-        Query query= session.createQuery("from Unidad where Block=:block and Torre=:torre");            
+        Query query= session.createQuery("SELECT e1 FROM Unidad e1 "
+                                       + "WHERE Block=:block "
+                                       + "AND Torre=:torre "
+                                       + "AND e1.idUnidad NOT IN (SELECT e2.unidad "
+                                                               + "FROM Gastoscomunes e2 "
+                                                               + "WHERE e2.periodo=:periodo)");            
         query.setParameter("block", block);
-        query.setParameter("torre", torre);        
+        query.setParameter("torre", torre);
+        query.setParameter("periodo", "2016-09");
         lista=query.list();           
         session.close();       
         return lista;
@@ -131,6 +136,28 @@ public class UnidadesControl {
         Query query= session.createQuery("from Unidad");        
         List<Unidad> list = query.list();                 
         session.close();        
+        return list;
+    }
+     
+    public List<Unidad> TraeUnidadesGastosComunesNoPago(){        
+        List<Unidad> list= new ArrayList<>();
+        try{
+        SessionFactory sf= NewHibernateUtil.getSessionFactory();
+        Session session;
+        session = sf.openSession();
+        
+        Query query= session.createQuery("SELECT e1 FROM Unidad e1 "
+                                       + "WHERE e1.idUnidad NOT IN ("
+                                                                  + "SELECT e2.unidad "
+                                                                  + "FROM Gastoscomunes e2 "
+                                                                  + "WHERE e2.periodo=:periodo)");
+        query.setParameter("periodo", "2016-09");
+        list= query.list();
+        session.close();               
+        }
+        catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
         return list;
     }
      
