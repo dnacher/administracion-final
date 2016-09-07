@@ -9,12 +9,12 @@ import hibernateControls.MontosControl;
 import java.net.URL;
 import java.text.ParseException;
 import java.time.LocalDate;
-import java.util.Calendar;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -87,7 +87,7 @@ public class FormularioGastosComunesController implements Initializable {
             gcc.guardarGastosComunes(gc);
             ConfiguracionControl.ActualizaId("gastoscomunes");
             control.ControlVentana cv= new ControlVentana();
-            String str="se ha cargado correctamente";            
+            String str="se ha cargado correctamente";                       
             cv.creaVentanaError(str, "tick");
             Cancelar(event);
         }         

@@ -14,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -36,6 +37,9 @@ public class MainController implements Initializable {
   
   @FXML
   private ComboBox<Integer> CmbTorre;
+  
+  @FXML
+  private Button BtnCancelar;
   
   @FXML
   Label LblInfo;
@@ -96,11 +100,17 @@ public class MainController implements Initializable {
         FormularioGastosComunesController controller = 
         loader.<FormularioGastosComunesController>getController();
         controller.initData(uni);
-        stage.show();   
+        stage.showAndWait();
+        MostrarTodos(event);
         }
         else{
             LblInfo.setText("Debe seleccionar una Unidad");
         }
+    }
+    
+    public void Cancelar(ActionEvent event){
+        Stage stage = (Stage) BtnCancelar.getScene().getWindow();
+        stage.close(); 
     }
    
     public void Mostrar(ActionEvent event) {       

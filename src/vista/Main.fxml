@@ -19,9 +19,10 @@
       <ComboBox fx:id="CmbTorre" layoutX="16.0" layoutY="42.0" prefWidth="150.0" promptText="Torre" />
       <Button layoutX="211.0" layoutY="12.0" mnemonicParsing="false" onAction="#Mostrar" prefHeight="46.0" prefWidth="84.0" text="Mostrar" />
       <Button layoutX="310.0" layoutY="12.0" mnemonicParsing="false" onAction="#MostrarTodos" prefHeight="46.0" prefWidth="95.0" text="Mostrar Todos" />
-      <Label fx:id="LblInfo" layoutX="115.0" layoutY="577.0" prefHeight="17.0" prefWidth="473.0">
+      <Label fx:id="LblInfo" layoutX="208.0" layoutY="577.0" prefHeight="20.0" prefWidth="380.0">
          <font>
             <Font size="14.0" />
          </font></Label>
+      <Button fx:id="BtnCancelar" layoutX="110.0" layoutY="573.0" mnemonicParsing="false" onAction="#Cancelar" prefHeight="25.0" prefWidth="84.0" text="Cancelar" />
    </children>
 </AnchorPane>
