@@ -67,7 +67,7 @@ public class CotizacionesController implements Initializable {
             cv.creaVentanaError("Se han cargado correctamente", "tick");
         }
         catch(Exception ex){
-            cv.creaVentanaError("Hubo un error al guardar" + ex.getMessage(), "error");
+            cv.creaVentanaError("Hubo un error al guardar " + ex.getMessage(), "error");
         }
     }
 

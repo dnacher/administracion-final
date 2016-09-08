@@ -8,14 +8,14 @@
 
 <AnchorPane id="AnchorPane" prefHeight="278.0" prefWidth="212.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.CotizacionesController">
    <children>
-      <ComboBox fx:id="CmbAnioInicial" layoutX="27.0" layoutY="59.0" prefHeight="25.0" prefWidth="73.0" promptText="2016" />
-      <ComboBox fx:id="CmbMesInicial" layoutX="124.0" layoutY="59.0" prefHeight="25.0" prefWidth="56.0" promptText="09" />
+      <ComboBox fx:id="CmbAnioInicial" layoutX="27.0" layoutY="59.0" prefHeight="25.0" prefWidth="73.0" />
+      <ComboBox fx:id="CmbMesInicial" layoutX="124.0" layoutY="59.0" prefHeight="25.0" prefWidth="56.0" />
       <Label layoutX="27.0" layoutY="29.0" prefHeight="17.0" prefWidth="73.0" text="Año Inicial" />
       <Label layoutX="124.0" layoutY="29.0" text="Mes Inicial" />
       <Label layoutX="121.0" layoutY="107.0" text="Mes Final" />
       <Label layoutX="24.0" layoutY="107.0" prefHeight="17.0" prefWidth="73.0" text="Año Final" />
-      <ComboBox fx:id="CmbMesFinal" layoutX="121.0" layoutY="137.0" prefHeight="25.0" prefWidth="56.0" promptText="09" />
-      <ComboBox fx:id="CmbAnioFinal" layoutX="24.0" layoutY="137.0" prefHeight="25.0" prefWidth="73.0" promptText="2016" />
+      <ComboBox fx:id="CmbMesFinal" layoutX="121.0" layoutY="137.0" prefHeight="25.0" prefWidth="56.0" />
+      <ComboBox fx:id="CmbAnioFinal" layoutX="24.0" layoutY="137.0" prefHeight="25.0" prefWidth="73.0" />
       <Button layoutX="24.0" layoutY="220.0" mnemonicParsing="false" onAction="#Generar" text="Generar" />
       <Button fx:id="BtnCancelar" layoutX="119.0" layoutY="220.0" mnemonicParsing="false" onAction="#Cancelar" text="Cancelar" />
       <TextField fx:id="TxtMonto" layoutX="39.0" layoutY="179.0" prefHeight="25.0" prefWidth="142.0" />
