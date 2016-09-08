@@ -11,6 +11,7 @@ public class Cotizaciones  implements java.io.Serializable {
 
      private String periodo;
      private Integer cotizacion;
+     private Integer periodoInt;
 
     public Cotizaciones() {
     }
@@ -19,9 +20,10 @@ public class Cotizaciones  implements java.io.Serializable {
     public Cotizaciones(String periodo) {
         this.periodo = periodo;
     }
-    public Cotizaciones(String periodo, Integer cotizacion) {
+    public Cotizaciones(String periodo, Integer cotizacion, Integer periodoInt) {
        this.periodo = periodo;
        this.cotizacion = cotizacion;
+       this.periodoInt=periodoInt;
     }
    
     public String getPeriodo() {
@@ -37,6 +39,14 @@ public class Cotizaciones  implements java.io.Serializable {
     
     public void setCotizacion(Integer cotizacion) {
         this.cotizacion = cotizacion;
+    }
+    
+    public int getPeriodoInt() {
+        return this.periodoInt;
+    }
+    
+    public void setPeriodoInt(int periodoInt) {
+        this.periodoInt = periodoInt;
     }
 
     @Override

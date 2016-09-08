@@ -1,6 +1,5 @@
 package hibernateControls;
 
-import java.util.ArrayList;
 import java.util.List;
 import modelo.Cotizaciones;
 import modelo.Unidad;

@@ -29,5 +29,8 @@
         <property name="periodo" type="string">
             <column name="Periodo" />
         </property>
+        <property name="periodoInt" type="java.lang.Integer">
+            <column name="PeriodoInt" />
+        </property>
     </class>
 </hibernate-mapping>

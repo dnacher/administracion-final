@@ -52,13 +52,19 @@ public class CotizacionesController implements Initializable {
                 for(int j=mesInicial;j<=mesFinal;j++){
                      Cotizaciones cotizaciones= new Cotizaciones();
                      cotizaciones.setCotizacion(monto);
+                     String periodoString;
+                     int periodoInt=0;
                     if(j<10){
-                        cotizaciones.setPeriodo(i + "-" + "0" + j);
+                        periodoString=i + "-" + "0" + j;
+                        periodoInt=Integer.parseInt(i + "" + j);
                     }
                      else{
-                        cotizaciones.setPeriodo(i + "-" + j);
+                        periodoString=i + "-" + j;
+                        periodoInt=Integer.parseInt(i + "" + j);
                     } 
                      
+                     cotizaciones.setPeriodo(periodoString);
+                     cotizaciones.setPeriodoInt(periodoInt);
                      lista.add(cotizaciones);
                 }
             }

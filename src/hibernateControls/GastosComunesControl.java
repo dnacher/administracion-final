@@ -21,7 +21,8 @@ public class GastosComunesControl {
         Transaction tx= session.beginTransaction(); 
         session.save(gastosComunes); 
         tx.commit();
-        session.close();
+        session.flush();
+        session.close();        
         }
         catch(Exception ex){
             throw new Exception(ex);
@@ -47,14 +48,12 @@ public class GastosComunesControl {
     public void CargaGastosComunesXUnidad(Unidad unidad){
         List<String> li=ConfiguracionControl.mesesLista(unidad);
         int i=0;
+        int periodo=0;
         MontosControl mc= new MontosControl();        
-        Monto m= mc.TraeMontoPesos(); 
-        int index=li.size()/2;
-            for(String s: li){
-                if(index==li.indexOf(s)){
-                    System.out.println("50%");
-                }
-                Gastoscomunes gc= new Gastoscomunes(i,m , unidad, 2000, true, 1, null, s);
+        Monto m= mc.TraeMontoPesos();        
+            for(String s: li){       
+                periodo=Integer.parseInt(s);
+                Gastoscomunes gc= new Gastoscomunes(i,m , unidad, 2000, true, 1, null, s,periodo);
                 try{
                     guardarGastosComunes(gc);
                 }

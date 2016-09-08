@@ -32,6 +32,7 @@ public class FormularioGastosComunesController implements Initializable {
     UnidadFx uni;
     URL ur;
     String periodo="";
+    int periodoInt=0;
     MontosControl mc=new MontosControl();
     ConfiguracionControl cc= new ConfiguracionControl();
     GastosComunesControl gcc= new GastosComunesControl();
@@ -83,6 +84,7 @@ public class FormularioGastosComunesController implements Initializable {
         gc.setFechaPago(ConfiguracionControl.TraeFecha(CmbFechaPago.getValue()));
         gc.setEstado(2);
         gc.setBonificacion(true);
+        gc.setPeriodoInt(periodoInt);
         try {
             gcc.guardarGastosComunes(gc);
             ConfiguracionControl.ActualizaId("gastoscomunes");
@@ -114,6 +116,7 @@ public class FormularioGastosComunesController implements Initializable {
            LblUnidad.setText(uni.getNombre() + " " + uni.getApellido() + " - " + uni.getPuerta());
            ControlUtil cu= new ControlUtil();
            periodo=cu.devuelvePeriodoActual();
+           periodoInt=cu.devuelvePeriodoActualInt();
            String str= "Periodo: " + periodo;
            LblPeriodo.setText(str);
        }

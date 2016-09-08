@@ -94,7 +94,9 @@ public class MainController implements Initializable {
     
       @FXML
     public void aceptar(ActionEvent event) throws IOException {
-        CotizacionesControl cco= new CotizacionesControl();
+     
+        //devuelve lista de cotizaciones del usuario, funciona bien
+        /*  CotizacionesControl cco= new CotizacionesControl();
         UnidadFx unifx = Table.getSelectionModel().getSelectedItem();
         Unidad uni=null;        
       try {
@@ -105,8 +107,9 @@ public class MainController implements Initializable {
         List<Cotizaciones>list=cco.TraePeriodosSinPagarUsuario(uni);
         for(Cotizaciones c: list){
             System.out.println(c.toString());
-        }
-        /*LblInfo.setText("");
+        }*/
+        
+        LblInfo.setText("");
         UnidadFx uni = Table.getSelectionModel().getSelectedItem();
         if(uni!=null){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/FormularioGastosComunes.fxml"));
@@ -122,7 +125,7 @@ public class MainController implements Initializable {
         }
         else{
             LblInfo.setText("Debe seleccionar una Unidad");
-        }*/
+        }
     }
     
     public void Cancelar(ActionEvent event){
