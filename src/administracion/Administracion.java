@@ -221,7 +221,8 @@ public class Administracion extends Application{
         settingsButton.setDisable(false);
     }
     
-    public void ConfigureButton() throws IOException{        
+    public void ConfigureButton() throws IOException{ 
+        cv.crearVentanasinCSS("Cotizaciones", "Generar Cotizaciones");
         /*   ********Prueba lanzar todos los Gastos comunes. funciona correctamente
         UnidadesControl uc= new UnidadesControl();
         List<Unidad>list=uc.TraeUnidades();

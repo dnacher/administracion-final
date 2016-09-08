@@ -7,13 +7,11 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 
-
 public class NewHibernateUtil {
 
     private static SessionFactory sf;
     private static ServiceRegistry serviceRegistrry;    
-    
-    
+        
     static {
         try {
             File f=new File("C:\\Users\\Dani-Fla-Mathi\\Documents\\NetBeansProjects\\Administracion\\src\\persistencia\\hibernate.cfg.xml");

@@ -171,10 +171,4 @@ public class Unidad  implements java.io.Serializable {
     public void setNotacreditos(Set notacreditos) {
         this.notacreditos = notacreditos;
     }
-
-
-
-
 }
-
-

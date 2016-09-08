@@ -3,13 +3,13 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 07/09/2016 06:08:05 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="modelo.Configuracion" table="configuracion" catalog="administracion" optimistic-lock="version">
-        <id name="nombreTabla" type="string">
-            <column name="NombreTabla" length="40" />
+    <class name="modelo.Cotizaciones" table="cotizaciones" catalog="administracion" optimistic-lock="version">
+        <id name="periodo" type="string">
+            <column name="Periodo" length="7" />
             <generator class="assigned" />
         </id>
-        <property name="id" type="java.lang.Integer">
-            <column name="Id" />
+        <property name="cotizacion" type="java.lang.Integer">
+            <column name="Cotizacion" />
         </property>
     </class>
 </hibernate-mapping>

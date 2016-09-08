@@ -7,16 +7,17 @@
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/administracion?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">Punknotdead123.</property>
-    <mapping resource="modelo/Concepto.hbm.xml"/>
-    <mapping resource="modelo/Configuracion.hbm.xml"/>
-    <mapping resource="modelo/Monto.hbm.xml"/>
     <mapping resource="modelo/Tipobonificacion.hbm.xml"/>
-    <mapping resource="modelo/Otrosgastos.hbm.xml"/>
-    <mapping resource="modelo/Convenio.hbm.xml"/>
     <mapping resource="modelo/Tipousuario.hbm.xml"/>
     <mapping resource="modelo/Usuario.hbm.xml"/>
     <mapping resource="modelo/Gastoscomunes.hbm.xml"/>
     <mapping resource="modelo/Unidad.hbm.xml"/>
     <mapping resource="modelo/Notacredito.hbm.xml"/>
+    <mapping resource="modelo/Concepto.hbm.xml"/>
+    <mapping resource="modelo/Configuracion.hbm.xml"/>
+    <mapping resource="modelo/Monto.hbm.xml"/>
+    <mapping resource="modelo/Otrosgastos.hbm.xml"/>
+    <mapping resource="modelo/Convenio.hbm.xml"/>
+    <mapping resource="modelo/Cotizaciones.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

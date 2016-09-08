@@ -95,10 +95,4 @@ public class Gastoscomunes  implements java.io.Serializable {
     public void setPeriodo(String periodo) {
         this.periodo = periodo;
     }
-
-
-
-
 }
-
-
