@@ -1,6 +1,5 @@
 package hibernateControls;
 
-import control.ControlVentana;
 import java.util.List;
 import modelo.Cotizaciones;
 import org.hibernate.Session;
@@ -11,7 +10,7 @@ import persistencia.NewHibernateUtil;
 
 public class CotizacionesControl {
     
-    public void guardarCotizacion(Cotizaciones cotizaciones){    
+    public void guardarCotizacion(Cotizaciones cotizaciones)throws Exception{    
         try{          
         SessionFactory sf= NewHibernateUtil.getSessionFactory();
         Session session;
@@ -22,13 +21,11 @@ public class CotizacionesControl {
         session.close();          
         }
         catch(Exception ex){
-            control.ControlVentana cv= new ControlVentana();
-            String str="Hubo un error al intentar Guardar: " + ex.getMessage();            
-            cv.creaVentanaError(str, "error");
+            throw new Exception(ex);
         }
     }
     
-    public void guardarCotizaciones(List<Cotizaciones> lista) {       
+    public void guardarCotizaciones(List<Cotizaciones> lista)throws Exception {       
         try{
             SessionFactory sf= NewHibernateUtil.getSessionFactory();
             StatelessSession session = sf.openStatelessSession();      
@@ -40,9 +37,7 @@ public class CotizacionesControl {
             session.close();        
         }
         catch(Exception ex){
-            control.ControlVentana cv= new ControlVentana();
-            String str="Hubo un error al intentar Guardar: " + ex.getMessage();            
-            cv.creaVentanaError(str, "error");
+            throw new Exception(ex);
         }
     }
 }

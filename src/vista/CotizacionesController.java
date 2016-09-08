@@ -81,6 +81,11 @@ public class CotizacionesController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         cargaComboAnio();
         cargaComboMes();
+        CmbAnioInicial.getSelectionModel().select("2016");
+        CmbAnioFinal.getSelectionModel().select("2016");
+        CmbMesFinal.getSelectionModel().select("09");
+        CmbMesInicial.getSelectionModel().select("01");
+        
     }    
     
     public void cargaComboAnio(){

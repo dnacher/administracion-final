@@ -1,7 +1,6 @@
 package hibernateControls;
 
 import control.ConfiguracionControl;
-import control.ControlVentana;
 import control.controlXML;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,32 +15,35 @@ import persistencia.NewHibernateUtil;
 public class UnidadesControl {
     private Object sessionFactory;
     
-    public void guardarUnidad(Unidad unidad){    
-        try{
-            if(!UnidadConstrain(unidad)){
+    public void guardarUnidad(Unidad unidad)throws Exception{ 
         SessionFactory sf= NewHibernateUtil.getSessionFactory();
         Session session;
         session = sf.openSession();
-        Transaction tx= session.beginTransaction(); 
-        session.save(unidad); 
-        tx.commit();
-        session.close();
-        ConfiguracionControl.ActualizaId("Unidad");
+        try{
+            if(!UnidadConstrain(unidad)){
+                
+                Transaction tx= session.beginTransaction(); 
+                session.save(unidad); 
+                tx.commit();
+                
+                ConfiguracionControl.ActualizaId("Unidad");
             }
         }
         catch(Exception ex){
-             control.ControlVentana cv= new ControlVentana();
-            String str="Hubo un error al intentar Guardar: " + ex.getMessage();            
-            cv.creaVentanaError(str, "error");
+            throw new Exception(ex);
+        }
+        finally{
+            session.close();
         }
     }
     
     public void guardarUnidades(List<Unidad> lista, int idUnidadViejo) throws Exception{
+        SessionFactory sf= NewHibernateUtil.getSessionFactory();
+        StatelessSession session = sf.openStatelessSession(); 
+        try{
         String str="\n\n           Unidad              ";
         str+= String.format("%n%-5s%5s%20s","Id","Insertado","Error");
-        str+= String.format("%n%-5s%5s%20s","-----","-----","--------------------");
-        SessionFactory sf= NewHibernateUtil.getSessionFactory();
-        StatelessSession session = sf.openStatelessSession();      
+        str+= String.format("%n%-5s%5s%20s","-----","-----","--------------------");             
         Transaction tx = session.beginTransaction();
         int idUnidad=lista.size();
         for (Unidad u: lista) { 
@@ -55,10 +57,17 @@ public class UnidadesControl {
              }
         }        
         tx.commit();       
-        session.close();
+        
         idUnidad+=idUnidadViejo;
         ConfiguracionControl.ActualizaIdXId("Unidad", idUnidad);
-        controlXML.creaArchivo(str);        
+        controlXML.creaArchivo(str);  
+        }
+        catch(Exception ex){
+            throw new Exception(ex);
+        }
+        finally{
+            session.close();
+        }
     }
     
     public boolean permitido(Unidad uni){
@@ -118,7 +127,7 @@ public class UnidadesControl {
         return Existe;
     }
         
-    public Unidad TraeUnidadTest(int idUnidad){
+    public Unidad TraeUnidadxID(int idUnidad){
         SessionFactory sf= NewHibernateUtil.getSessionFactory();
         Session session;
         session = sf.openSession();
@@ -170,7 +179,5 @@ public class UnidadesControl {
             uni=(Unidad)session.get(Unidad.class, id); 
             session.close();
             return uni;
-     }
-     
-     
+     }     
 }

@@ -29,6 +29,7 @@ public class GastosComunesControl {
     }
     
     public void guardarListaGastosComunes(List<Gastoscomunes> lista)throws Exception{
+        try{
         SessionFactory sf= NewHibernateUtil.getSessionFactory();
         StatelessSession session = sf.openStatelessSession();
         Transaction tx = session.beginTransaction();
@@ -36,7 +37,11 @@ public class GastosComunesControl {
          session.insert(gastosComunes);
         }
         tx.commit();        
-        session.close();       
+        session.close();    
+        }
+        catch(Exception ex){
+            throw new Exception(ex);
+        }
     }
     
     public void CargaGastosComunesXUnidad(Unidad unidad){
