@@ -93,12 +93,12 @@ public class UnidadesControl {
         SessionFactory sf= NewHibernateUtil.getSessionFactory();
         Session session;
         session = sf.openSession();
-        Query query= session.createQuery("SELECT e1 FROM Unidad e1 "
+        Query query= session.createQuery("SELECT unidad FROM Unidad unidad "
                                        + "WHERE Block=:block "
                                        + "AND Torre=:torre "
-                                       + "AND e1.idUnidad NOT IN (SELECT e2.unidad "
-                                                               + "FROM Gastoscomunes e2 "
-                                                               + "WHERE e2.periodo=:periodo)");            
+                                       + "AND unidad.idUnidad NOT IN (SELECT gastoscomunes.unidad "
+                                                               + "FROM Gastoscomunes gastoscomunes "
+                                                               + "WHERE gastoscomunes.periodo=:periodo)");            
         query.setParameter("block", block);
         query.setParameter("torre", torre);
         query.setParameter("periodo", "2016-09");

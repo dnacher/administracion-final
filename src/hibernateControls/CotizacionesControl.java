@@ -1,7 +1,10 @@
 package hibernateControls;
 
+import java.util.ArrayList;
 import java.util.List;
 import modelo.Cotizaciones;
+import modelo.Unidad;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.StatelessSession;
@@ -39,5 +42,21 @@ public class CotizacionesControl {
         catch(Exception ex){
             throw new Exception(ex);
         }
+    }
+    
+    public List<Cotizaciones> TraePeriodosSinPagarUsuario(Unidad unidad){
+        List<Cotizaciones> lista;
+        SessionFactory sf= NewHibernateUtil.getSessionFactory();
+        Session session;
+        session = sf.openSession();
+        Query query= session.createQuery("SELECT cotizaciones FROM Cotizaciones cotizaciones "
+                                       + "WHERE cotizaciones.periodo "
+                                       + "NOT IN (SELECT gastoscomunes.periodo "
+                                               + "FROM Gastoscomunes gastoscomunes "
+                                               + "WHERE gastoscomunes.unidad=:unidad)"); 
+        query.setParameter("unidad", unidad);
+        lista=query.list();           
+        session.close();       
+        return lista;
     }
 }

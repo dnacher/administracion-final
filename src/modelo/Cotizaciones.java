@@ -39,8 +39,13 @@ public class Cotizaciones  implements java.io.Serializable {
         this.cotizacion = cotizacion;
     }
 
+    @Override
+    public String toString() {
+        return "Cotizaciones{" + "periodo: " + periodo + ", cotizacion: " + cotizacion + '}';
+    }
 
 
+    
 
 }
 

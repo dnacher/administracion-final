@@ -2,11 +2,15 @@ package vista;
 
 import TablasJavaFx.UnidadFx;
 import control.ControlVentana;
+import hibernateControls.CotizacionesControl;
 import hibernateControls.UnidadesControl;
 import java.io.IOException;
 import java.net.URL;
+import java.text.ParseException;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -24,6 +28,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import modelo.Cotizaciones;
 import modelo.Unidad;
 
 
@@ -88,8 +93,20 @@ public class MainController implements Initializable {
     }   
     
       @FXML
-    public void aceptar(ActionEvent event) throws IOException {          
-        LblInfo.setText("");
+    public void aceptar(ActionEvent event) throws IOException {
+        CotizacionesControl cco= new CotizacionesControl();
+        UnidadFx unifx = Table.getSelectionModel().getSelectedItem();
+        Unidad uni=null;        
+      try {
+          uni = unifx.devuelveUnidad(unifx);
+      } catch (ParseException ex) {
+          System.out.println(ex.getMessage());
+      }
+        List<Cotizaciones>list=cco.TraePeriodosSinPagarUsuario(uni);
+        for(Cotizaciones c: list){
+            System.out.println(c.toString());
+        }
+        /*LblInfo.setText("");
         UnidadFx uni = Table.getSelectionModel().getSelectedItem();
         if(uni!=null){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/FormularioGastosComunes.fxml"));
@@ -105,7 +122,7 @@ public class MainController implements Initializable {
         }
         else{
             LblInfo.setText("Debe seleccionar una Unidad");
-        }
+        }*/
     }
     
     public void Cancelar(ActionEvent event){

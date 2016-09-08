@@ -1,12 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<!DOCTYPE hibernate-configuration PUBLIC 
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN" 
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
-  <session-factory>
-    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+  <session-factory>    
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/administracion?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">Punknotdead123.</property>
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    
+    <!--//Minimum number of JDBC connections in the pool. Hibernate default: 1-->
+    <property name="hibernate.c3p0.min_size">1</property>
+    <!--//Minimum number of JDBC connections in the pool. Hibernate default: 1-->
+    <property name="hibernate.c3p0.max_size">3</property>
+    <!--//Maximum number of JDBC connections in the pool. Hibernate default: 100-->
+    <property name="hibernate.c3p0.timeout">3000</property>
+    <!--//When an idle connection is removed from the pool (in second). Hibernate default: 0, never expire.-->
+    <property name="hibernate.c3p0.max_statements">50</property>
+    <!--//Number of prepared statements will be cached. Increase performance. Hibernate default: 0 , caching is disable.-->
+    <property name="hibernate.c3p0.idle_test_period">300</property>
+    
     <mapping resource="modelo/Tipobonificacion.hbm.xml"/>
     <mapping resource="modelo/Tipousuario.hbm.xml"/>
     <mapping resource="modelo/Usuario.hbm.xml"/>
