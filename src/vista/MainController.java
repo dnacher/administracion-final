@@ -61,8 +61,7 @@ public class MainController implements Initializable {
       
        cargarComboBlock();
        cargarComboTorre();
-       list=uc.TraeUnidadesGastosComunesNoPago();       
-                
+       list=uc.TraeUnidadesGastosComunesNoPago();               
        List<UnidadFx> li=ufx.getLista(list);       
        retorno = FXCollections.observableList(li);
        TableColumn firstNameCol = new TableColumn("Nombre");

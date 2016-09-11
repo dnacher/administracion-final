@@ -16,11 +16,11 @@ public class UnidadesControl {
     private Object sessionFactory;
     
     public void guardarUnidad(Unidad unidad)throws Exception{ 
-        SessionFactory sf= NewHibernateUtil.getSessionFactory();
-        Session session;
-        session = sf.openSession();
+        /*SessionFactory sf= NewHibernateUtil.getSessionFactory();
+        Session session;*/
+        Session session = SessionConnection.getConnection().useSession();
         try{
-            if(!UnidadConstrain(unidad)){
+            if(!UnidadConstrain(unidad, session)){
                 
                 Transaction tx= session.beginTransaction(); 
                 session.save(unidad); 
@@ -47,7 +47,7 @@ public class UnidadesControl {
         Transaction tx = session.beginTransaction();
         int idUnidad=lista.size();
         for (Unidad u: lista) { 
-             if(!UnidadConstrain(u)){
+             if(!UnidadesConstrain(u,session)){
                  session.insert(u);
                  str+= String.format("%n%-5s%5s%20s",u.getIdUnidad(),"Si","SIN ERROR");
              } 
@@ -72,9 +72,9 @@ public class UnidadesControl {
     
     public boolean permitido(Unidad uni){
         boolean permitido= true;
-        SessionFactory sf= NewHibernateUtil.getSessionFactory();
-        Session session;
-        session = sf.openSession();
+        /*SessionFactory sf= NewHibernateUtil.getSessionFactory();
+        Session session;*/
+        Session session = SessionConnection.getConnection().useSession();
         Query query= session.createQuery("from Unidad where Block=:block and Torre=:torre and Puerta=:puerta and Activo=:activo");            
         query.setParameter("block", uni.getBlock());
         query.setParameter("torre", uni.getTorre());
@@ -90,9 +90,9 @@ public class UnidadesControl {
     
     public List<Unidad> TraeUnidadesXBlockTorreNoPago(String block, int torre){
         List<Unidad> lista;
-        SessionFactory sf= NewHibernateUtil.getSessionFactory();
-        Session session;
-        session = sf.openSession();
+       /* SessionFactory sf= NewHibernateUtil.getSessionFactory();*/
+        //Session session;
+        Session session = SessionConnection.getConnection().useSession();
         Query query= session.createQuery("SELECT unidad FROM Unidad unidad "
                                        + "WHERE Block=:block "
                                        + "AND Torre=:torre "
@@ -107,11 +107,11 @@ public class UnidadesControl {
         return lista;
     }
     
-    public boolean UnidadConstrain(Unidad unidad){
+    public boolean UnidadConstrain(Unidad unidad, Session session){
        boolean Existe=false;
-       SessionFactory sf= NewHibernateUtil.getSessionFactory();
-        Session session;
-        session = sf.openSession();
+        //SessionFactory sf= NewHibernateUtil.getSessionFactory();
+        //Session session;
+        //session = SessionConnection.getConnection().useSession();
         Query query= session.createQuery("from Unidad where Block=:block and Torre=:torre and Puerta=:puerta and Nombre=:nombre and Apellido=:apellido and Activo=:activo");            
         query.setParameter("block", unidad.getBlock());
         query.setParameter("torre", unidad.getTorre()); 
@@ -120,17 +120,37 @@ public class UnidadesControl {
         query.setParameter("apellido", unidad.getApellido()); 
         query.setParameter("activo", unidad.getActivo()); 
         Unidad uni=(Unidad) query.uniqueResult();
-        session.close();
+        //session.close();
         if(uni!=null){
             Existe=true;
         }
         return Existe;
     }
-        
+     
+    public boolean UnidadesConstrain(Unidad unidad, StatelessSession session){
+       boolean Existe=false;
+        //SessionFactory sf= NewHibernateUtil.getSessionFactory();
+        //Session session;
+        //session = sf.getCurrentSession();
+        Query query= session.createQuery("from Unidad where Block=:block and Torre=:torre and Puerta=:puerta and Nombre=:nombre and Apellido=:apellido and Activo=:activo");            
+        query.setParameter("block", unidad.getBlock());
+        query.setParameter("torre", unidad.getTorre()); 
+        query.setParameter("puerta", unidad.getPuerta()); 
+        query.setParameter("nombre", unidad.getNombre()); 
+        query.setParameter("apellido", unidad.getApellido()); 
+        query.setParameter("activo", unidad.getActivo()); 
+        Unidad uni=(Unidad) query.uniqueResult();
+        //session.close();
+        if(uni!=null){
+            Existe=true;
+        }
+        return Existe;
+    }
+    
     public Unidad TraeUnidadxID(int idUnidad){
-        SessionFactory sf= NewHibernateUtil.getSessionFactory();
-        Session session;
-        session = sf.openSession();
+        //SessionFactory sf= NewHibernateUtil.getSessionFactory();
+        //Session session;
+        Session session = SessionConnection.getConnection().useSession();
         Query query= session.createQuery("from Unidad where IdUnidad=:id");            
         query.setParameter("id", idUnidad);        
         Unidad uni=(Unidad) query.uniqueResult();
@@ -140,8 +160,8 @@ public class UnidadesControl {
     
      public List<Unidad> TraeUnidades(){        
         SessionFactory sf= NewHibernateUtil.getSessionFactory();
-        Session session;
-        session = sf.openSession();
+        //Session session;
+        Session session = SessionConnection.getConnection().useSession();
         Query query= session.createQuery("from Unidad");        
         List<Unidad> list = query.list();                 
         session.close();        
@@ -150,11 +170,10 @@ public class UnidadesControl {
      
     public List<Unidad> TraeUnidadesGastosComunesNoPago(){        
         List<Unidad> list= new ArrayList<>();
-        try{
-        SessionFactory sf= NewHibernateUtil.getSessionFactory();
-        Session session;
-        session = sf.openSession();
-        
+        /*SessionFactory sf= NewHibernateUtil.getSessionFactory();
+        Session session;*/
+        Session session = SessionConnection.getConnection().useSession();
+        try{                
         Query query= session.createQuery("SELECT e1 FROM Unidad e1 "
                                        + "WHERE e1.idUnidad NOT IN ("
                                                                   + "SELECT e2.unidad "
@@ -162,22 +181,26 @@ public class UnidadesControl {
                                                                   + "WHERE e2.periodo=:periodo)");
         query.setParameter("periodo", "2016-09");
         list= query.list();
-        session.close();               
+                       
         }
         catch(Exception ex){
             System.out.println(ex.getMessage());
+        }
+        finally{
+           
+            session.close();
         }
         return list;
     }
      
      public Unidad TraeUnidadXId(int id){
-         SessionFactory sf= NewHibernateUtil.getSessionFactory();
-            Session session;
-            session = sf.openSession();
-            Transaction tx= session.beginTransaction(); 
-            Unidad uni;
-            uni=(Unidad)session.get(Unidad.class, id); 
-            session.close();
-            return uni;
+         /*SessionFactory sf= NewHibernateUtil.getSessionFactory();
+         Session session;*/
+         Session session = SessionConnection.getConnection().useSession();
+         //session.beginTransaction(); 
+         Unidad uni;
+         uni=(Unidad)session.get(Unidad.class, id); 
+         session.close();
+         return uni;
      }     
 }

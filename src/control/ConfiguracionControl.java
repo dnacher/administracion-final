@@ -1,5 +1,6 @@
 package control;
 
+import hibernateControls.SessionConnection;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -26,9 +27,9 @@ public class ConfiguracionControl {
     public static int traeUltimoId(String tabla){
         Configuracion c;
         int i=-1;
-        SessionFactory sf= NewHibernateUtil.getSessionFactory();
-        Session session;
-        session = sf.openSession();
+        //SessionFactory sf= NewHibernateUtil.getSessionFactory();
+        //Session session;
+        Session session = SessionConnection.getConnection().useSession();
         Query query= session.createQuery("from Configuracion where NombreTabla=:name");            
         query.setParameter("name", tabla);
         c=(Configuracion)query.uniqueResult();           
@@ -43,9 +44,9 @@ public class ConfiguracionControl {
         int i=traeUltimoId(tabla);
         Configuracion c;
         if(i!=-1){
-            SessionFactory sf= NewHibernateUtil.getSessionFactory();
-            Session session;
-            session = sf.openSession();
+            /*SessionFactory sf= NewHibernateUtil.getSessionFactory();
+            Session session;*/
+            Session session = SessionConnection.getConnection().useSession();
             Query query= session.createQuery("from Configuracion where NombreTabla=:name");            
             query.setParameter("name", tabla);
             c=(Configuracion)query.uniqueResult(); 
@@ -61,9 +62,9 @@ public class ConfiguracionControl {
         int i=traeUltimoId(tabla);
         Configuracion c;
         if(i!=-1){
-            SessionFactory sf= NewHibernateUtil.getSessionFactory();
-            Session session;
-            session = sf.openSession();
+            /*SessionFactory sf= NewHibernateUtil.getSessionFactory();
+            Session session;*/
+            Session session = SessionConnection.getConnection().useSession();
             Query query= session.createQuery("from Configuracion where NombreTabla=:name");            
             query.setParameter("name", tabla);
             c=(Configuracion)query.uniqueResult();             
@@ -76,9 +77,9 @@ public class ConfiguracionControl {
     
     public static void actualizaBonificacion(String tabla, int bonificacion){
         Configuracion c;
-            SessionFactory sf= NewHibernateUtil.getSessionFactory();
-            Session session;
-            session = sf.openSession();
+            /*SessionFactory sf= NewHibernateUtil.getSessionFactory();
+            Session session;*/
+            Session session = SessionConnection.getConnection().useSession();
             Query query= session.createQuery("from Configuracion where NombreTabla=:name");            
             query.setParameter("name", tabla);
             c=(Configuracion)query.uniqueResult();             

@@ -14,9 +14,9 @@ public class CotizacionesControl {
     
     public void guardarCotizacion(Cotizaciones cotizaciones)throws Exception{    
         try{          
-        SessionFactory sf= NewHibernateUtil.getSessionFactory();
-        Session session;
-        session = sf.openSession();
+        /*SessionFactory sf= NewHibernateUtil.getSessionFactory();
+        Session session;*/
+        Session session = SessionConnection.getConnection().useSession();
         Transaction tx= session.beginTransaction(); 
         session.save(cotizaciones); 
         tx.commit();
@@ -45,9 +45,10 @@ public class CotizacionesControl {
     
     public List<Cotizaciones> TraePeriodosSinPagarUsuario(Unidad unidad){
         List<Cotizaciones> lista;
-        SessionFactory sf= NewHibernateUtil.getSessionFactory();
+        /*SessionFactory sf= NewHibernateUtil.getSessionFactory();
         Session session;
-        session = sf.openSession();
+        session = SessionConnection.getConnection().useSession();*/
+        Session session=SessionConnection.getConnection().useSession();
         Query query= session.createQuery("SELECT cotizaciones FROM Cotizaciones cotizaciones "
                                        + "WHERE cotizaciones.periodo "
                                        + "NOT IN (SELECT gastoscomunes.periodo "

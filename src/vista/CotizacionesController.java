@@ -56,7 +56,7 @@ public class CotizacionesController implements Initializable {
                      int periodoInt=0;
                     if(j<10){
                         periodoString=i + "-" + "0" + j;
-                        periodoInt=Integer.parseInt(i + "" + j);
+                        periodoInt=Integer.parseInt(i + "0" + j);
                     }
                      else{
                         periodoString=i + "-" + j;

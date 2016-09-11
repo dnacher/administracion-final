@@ -1,6 +1,7 @@
 
 package control;
 
+import hibernateControls.SessionConnection;
 import java.sql.Connection;
 import java.sql.SQLException;
 import modelo.Usuario;
@@ -15,23 +16,24 @@ public class LoginControl {
     
     public Usuario Login(String nombreusuario, String Password){
         Usuario usuario=null;
-        SessionFactory sf= NewHibernateUtil.getSessionFactory();
+        /*SessionFactory sf= NewHibernateUtil.getSessionFactory();
         Session session;
-        session = sf.openSession();
+        session = sf.openSession();*/
+        Session session=SessionConnection.getConnection().useSession();
         Query query= session.createQuery("from Usuario where upper(NombreUsuario)=:name and Password=:pass");            
         query.setParameter("name", nombreusuario.toUpperCase());
         query.setParameter("pass", Password);              
         usuario=(Usuario)query.uniqueResult();           
-        session.close();
+        //session.close();
         return usuario;
     }
     
     public Connection conectar() throws Exception{
         Connection conexion= null;         
         try {
-            Session session;
-            SessionFactory sf= NewHibernateUtil.getSessionFactory();
-            session = sf.openSession();
+           /* Session session;
+            SessionFactory sf= NewHibernateUtil.getSessionFactory();*/
+            Session session = SessionConnection.getConnection().useSession();              
             SessionFactoryImplementor sessionFactoryImplementation = (SessionFactoryImplementor) session.getSessionFactory();
             ConnectionProvider connectionProvider = sessionFactoryImplementation.getConnectionProvider();            
             conexion=connectionProvider.getConnection();

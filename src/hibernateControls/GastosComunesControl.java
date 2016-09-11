@@ -14,18 +14,21 @@ import persistencia.NewHibernateUtil;
 public class GastosComunesControl {
     
     public void guardarGastosComunes(Gastoscomunes gastosComunes)throws Exception{    
-        try{
-        SessionFactory sf= NewHibernateUtil.getSessionFactory();
-        Session session;
-        session = sf.openSession();
-        Transaction tx= session.beginTransaction(); 
+        /*SessionFactory sf= NewHibernateUtil.getSessionFactory();
+        Session session;*/
+        Session session = SessionConnection.getConnection().useSession();  
+        try{            
+        session.beginTransaction(); 
         session.save(gastosComunes); 
-        tx.commit();
-        session.flush();
-        session.close();        
+        session.getTransaction().commit();
+        //tx.commit();       
+        
         }
         catch(Exception ex){
             throw new Exception(ex);
+        }
+        finally{
+            session.close();        
         }
     }
     
