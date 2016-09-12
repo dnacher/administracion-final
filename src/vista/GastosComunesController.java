@@ -4,7 +4,9 @@ import TablasJavaFx.UnidadFx;
 import control.ControlVentana;
 import hibernateControls.UnidadesControl;
 import java.io.IOException;
+import java.math.RoundingMode;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -31,7 +33,7 @@ import javafx.stage.StageStyle;
 import modelo.Unidad;
 
 
-public class MainController implements Initializable {
+public class GastosComunesController implements Initializable {
 
   @FXML
   private TableView<UnidadFx> Table; 
@@ -201,7 +203,11 @@ public class MainController implements Initializable {
                 @Override
                 public void handle(MouseEvent event) {
                     int num=(int)data.getPieValue();
-                    LblInfoPieChart.setText("Total: " + num);
+                    double porc=(((double)num*(double)100)/total);
+                    DecimalFormat df = new DecimalFormat("#.#");
+                    df.setRoundingMode(RoundingMode.CEILING);
+                    String porcent=df.format(porc);
+                    LblInfoPieChart.setText(data.getName()+ ": " + num + " (" + porcent + " % aprox.)");
                 }
             });
         }

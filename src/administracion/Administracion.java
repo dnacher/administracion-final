@@ -33,6 +33,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import modelo.Usuario;
 import control.LoginControl;
+import javafx.event.ActionEvent;
 
 public class Administracion extends Application{
    
@@ -106,6 +107,7 @@ public class Administracion extends Application{
         creaFuncionesMouse();     
         creaMensajes();
         creaMenu();
+      
     }  
     
     public void creaMensajes(){    
@@ -136,6 +138,7 @@ public class Administracion extends Application{
         
         creaMensajeItemsMenuEntra(ProcesosMasivos,"Procesos Masivos" );
         creaMensajeItemsMenuSale(ProcesosMasivos);
+
     }
     
     public void creaMenu(){
@@ -162,7 +165,10 @@ public class Administracion extends Application{
     
     public void creaFuncionesMouse(){
         //Crea las funciones cuando se hace clic
-        Convenios.setOnMousePressed(mouseEvent -> {});        
+        Convenios.setOnMousePressed(mouseEvent -> {
+            cv.creaVentanaError("funcion Aun no creada", "warning");
+        });
+        
         Unidades.setOnMousePressed(mouseEvent -> {try {
             cv.crearVentanaMain("Unidades", "Crear Unidades");
             } catch (IOException ex) {
@@ -171,15 +177,15 @@ public class Administracion extends Application{
         });   
         
         GastosComunes.setOnMousePressed(mouseEvent -> {try {
-            cv.crearVentanasinCSS("PagoGastosComunes", "Pago Gastos Comunes");
+            cv.crearVentanasinCSS("GastosComunes", "Pago Gastos Comunes");
             } catch (IOException ex) {
                 Logger.getLogger(Administracion.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
         
         ConfiguracionUsuarios.setOnMousePressed(mouseEvent -> {try {
-            cv.crearVentanasinCSS("Main", "Pago Gastos Comunes");
-            } catch (IOException ex) {
+            cv.creaVentanaError("funcion Aun no creada", "warning");
+            } catch (Exception ex) {
                 Logger.getLogger(Administracion.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
@@ -196,9 +202,16 @@ public class Administracion extends Application{
                 Logger.getLogger(Administracion.class.getName()).log(Level.SEVERE, null, ex);
             }});
         
-        OtrosGastos.setOnMousePressed(mouseEvent -> {});
+        OtrosGastos.setOnMousePressed(mouseEvent -> {
+            cv.creaVentanaError("funcion Aun no creada", "warning");
+        });
         
-        ImportacionExportacion.setOnMousePressed(mouseEvent -> {});
+        ImportacionExportacion.setOnMousePressed(mouseEvent -> {
+            cv.creaVentanaError("funcion Aun no creada", "warning");
+        });
+        
+        
+       
     }
     
     private void Login(){  
@@ -307,7 +320,9 @@ public class Administracion extends Application{
         TxtPassword.setAlignment(Pos.CENTER);
         TxtPassword.setPromptText("Contraseña");        
         AnchorPane.setLeftAnchor(TxtPassword,170d);
-        AnchorPane.setBottomAnchor(TxtPassword,300d);      
+        AnchorPane.setBottomAnchor(TxtPassword,300d); 
+        //llama al Login dando enter en el password text Field
+        TxtPassword.setOnAction(event -> Login());       
     }
     
     private void initPrefPane() {       
@@ -351,5 +366,10 @@ public class Administracion extends Application{
      @Override public void stop() {
         System.exit(0);
     }
+     
+    public void onEnter(ActionEvent ae){
+        Login();
+    }
+
     
 }
