@@ -14,7 +14,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -26,6 +25,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import modelo.Gastoscomunes;
 import modelo.Unidad;
+import eu.hansolo.enzo.notification.*;
 
 public class FormularioGastosComunesController implements Initializable {
     
@@ -88,7 +88,7 @@ public class FormularioGastosComunesController implements Initializable {
         try {
             gcc.guardarGastosComunes(gc);
             ConfiguracionControl.ActualizaId("gastoscomunes");
-            control.ControlVentana cv= new ControlVentana();
+            control.ControlVentana cv= new ControlVentana();            
             String str="se ha cargado correctamente";                       
             cv.creaVentanaError(str, "tick");
             Cancelar(event);

@@ -1,5 +1,6 @@
 package vista;
 
+import eu.hansolo.enzo.notification.Notification;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -32,7 +33,8 @@ public class MensajeController implements Initializable {
     public void initData(String mensaje, String imagen) {
         TxtInformation.setText(mensaje);
         try{
-        Image img= new Image(TraeIcono(imagen));        
+        //Image img= new Image(TraeIcono(imagen));        
+            Image img=TraeIcono(imagen);
         LblImage.setImage(img);                
         }
         catch(Exception ex){
@@ -46,20 +48,26 @@ public class MensajeController implements Initializable {
         stage.close();
     }
     
-    public String TraeIcono(String icono){
+    public Image TraeIcono(String icono){
         switch(icono){
             case "error":
-                 return "/vista/imagenes/errorIcon.png";
+               return Notification.ERROR_ICON;
+                // return "/vista/imagenes/errorIcon.png";
             case "information":
-                return "/vista/imagenes/informationIcon.png";
+                return Notification.INFO_ICON;
+                 //return "/vista/imagenes/informationIcon.png";
             case "question":
-                 return "/vista/imagenes/questionIcon.png";
+                return Notification.WARNING_ICON;
+                 //return "/vista/imagenes/questionIcon.png";
             case "warning":
-                 return "/vista/imagenes/warningIcon.png";
+                return Notification.WARNING_ICON;
+                 //return "/vista/imagenes/warningIcon.png";
             case "tick":
-                return "/vista/imagenes/Tick.png";
+               return Notification.SUCCESS_ICON;
+                //return "/vista/imagenes/Tick.png";
             default:
-                 return "/vista/imagenes/errorIcon.png";        
+                return Notification.ERROR_ICON;
+                 //return "/vista/imagenes/errorIcon.png";        
         }
         
      }

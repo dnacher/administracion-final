@@ -2,22 +2,21 @@ package vista;
 
 import TablasJavaFx.UnidadFx;
 import control.ControlVentana;
-import hibernateControls.CotizacionesControl;
 import hibernateControls.UnidadesControl;
 import java.io.IOException;
 import java.net.URL;
-import java.text.ParseException;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
+import javafx.scene.chart.PieChart.Data;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -25,10 +24,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import modelo.Cotizaciones;
 import modelo.Unidad;
 
 
@@ -48,6 +47,12 @@ public class MainController implements Initializable {
   
   @FXML
   Label LblInfo;
+  
+  @FXML
+  PieChart pieChart;
+  
+  @FXML
+  Label LblInfoPieChart;
   
   ControlVentana cv= new ControlVentana();
   UnidadesControl uc= new UnidadesControl();
@@ -79,7 +84,7 @@ public class MainController implements Initializable {
                 new PropertyValueFactory<>("apellido"));
  
        
-        emailCol.setMinWidth(200);
+        emailCol.setMinWidth(180);
         emailCol.setCellValueFactory(
                 new PropertyValueFactory<>("mail"));
         
@@ -89,6 +94,7 @@ public class MainController implements Initializable {
                 new PropertyValueFactory<>("fechaIngreso"));
         Table.getColumns().addAll(firstNameCol, lastNameCol, emailCol,FechaCol);
         cargaTabla(retorno);
+        cargaGrafica("",0);
     }   
     
       @FXML
@@ -121,6 +127,7 @@ public class MainController implements Initializable {
         controller.initData(uni);
         stage.showAndWait();
         MostrarTodos(event);
+        cargaGrafica("",0);
         }
         else{
             LblInfo.setText("Debe seleccionar una Unidad");
@@ -139,6 +146,7 @@ public class MainController implements Initializable {
         List<UnidadFx> li=ufx.getLista(listaTorreBlock);       
         retorno = FXCollections.observableList(li);
         cargaTabla(retorno);
+        cargaGrafica(CmbBlock.getValue(), CmbTorre.getValue());
         }
         catch(Exception ex){
             LblInfo.setText("Debe seleccionar valores de Block y Torre para buscar");
@@ -150,6 +158,7 @@ public class MainController implements Initializable {
         List<UnidadFx> li=ufx.getLista(listaTotal);       
         retorno = FXCollections.observableList(li);
         cargaTabla(retorno);
+        cargaGrafica("",0);
     }
     
     public void cargarComboBlock(){
@@ -168,4 +177,27 @@ public class MainController implements Initializable {
         LblInfo.setText("se muestran " + retorno.size() + " registros");
         Table.setItems(retorno);     
     }
+    
+    public void cargaGrafica(String block, int torre){
+        LblInfoPieChart.setText("");
+        int total=uc.totalUnidades(block,torre);
+        int totalPago=total-retorno.size();
+        int totalNoPago=total-totalPago;
+        ObservableList<Data> lista=FXCollections.observableArrayList(                
+                new PieChart.Data("No pagó", totalNoPago),
+                new PieChart.Data("Pagó", totalPago)
+        );
+        pieChart.setData(lista);
+        
+        for(final PieChart.Data data: pieChart.getData()){
+            data.getNode().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    int num=(int)data.getPieValue();
+                    LblInfoPieChart.setText("Total: " + num);
+                }
+            });
+        }
+    }
 }
+

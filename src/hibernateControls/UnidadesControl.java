@@ -2,6 +2,7 @@ package hibernateControls;
 
 import control.ConfiguracionControl;
 import control.controlXML;
+import static java.lang.Math.toIntExact;
 import java.util.ArrayList;
 import java.util.List;
 import modelo.Unidad;
@@ -202,5 +203,23 @@ public class UnidadesControl {
          uni=(Unidad)session.get(Unidad.class, id); 
          session.close();
          return uni;
-     }     
+     }   
+     
+     public int totalUnidades(String block, int torre){
+        Session session = SessionConnection.getConnection().useSession();
+        if(block.equals("") && torre==0){        
+            Query query = session.createQuery("select count(*) from Unidad unidad");
+            Long count = (Long)query.uniqueResult();       
+            int retorno=toIntExact(count);
+            return retorno;
+        }
+        else{
+            Query query = session.createQuery("select count(*) from Unidad unidad where unidad.block=:elBlock and unidad.torre=:laTorre");
+            query.setParameter("elBlock", block);
+            query.setParameter("laTorre", torre);
+            Long count = (Long)query.uniqueResult();       
+            int retorno=toIntExact(count);
+            return retorno;
+         }
+     }
 }
