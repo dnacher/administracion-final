@@ -69,30 +69,37 @@ public class MainController implements Initializable {
        list=uc.TraeUnidadesGastosComunesNoPago();               
        List<UnidadFx> li=ufx.getLista(list);       
        retorno = FXCollections.observableList(li);
-       TableColumn firstNameCol = new TableColumn("Nombre");
-       TableColumn lastNameCol = new TableColumn("Apellido");
-       TableColumn emailCol = new TableColumn("Email");
-       TableColumn FechaCol = new TableColumn("Fecha");
+       TableColumn Nombre = new TableColumn("Nombre");
+       TableColumn Apellido = new TableColumn("Apellido");
+       TableColumn Block = new TableColumn("Block");
+       TableColumn Torre = new TableColumn("Torre");
+       TableColumn Puerta= new TableColumn("Puerta");
         
-   firstNameCol.setMinWidth(100);
-       firstNameCol.setCellValueFactory(
-                new PropertyValueFactory<>("nombre"));
+   Nombre.setMinWidth(100);
+   Nombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
        
-       
-        lastNameCol.setMinWidth(100);
-        lastNameCol.setCellValueFactory(
-                new PropertyValueFactory<>("apellido"));
+   Apellido.setMinWidth(100);
+   Apellido.setCellValueFactory(new PropertyValueFactory<>("apellido"));
  
+   Block.setMinWidth(50);
+   Block.setCellValueFactory(new PropertyValueFactory<>("Block"));
+   
+   Torre.setMinWidth(50);
+   Torre.setCellValueFactory(new PropertyValueFactory<>("Torre"));
+   
+   Puerta.setMinWidth(60);
+   Puerta.setCellValueFactory(new PropertyValueFactory<>("Puerta"));
        
-        emailCol.setMinWidth(180);
+       /* emailCol.setMinWidth(180);
         emailCol.setCellValueFactory(
                 new PropertyValueFactory<>("mail"));
         
         
         FechaCol.setMinWidth(50);
         FechaCol.setCellValueFactory(
-                new PropertyValueFactory<>("fechaIngreso"));
-        Table.getColumns().addAll(firstNameCol, lastNameCol, emailCol,FechaCol);
+                new PropertyValueFactory<>("fechaIngreso"));*/
+        
+        Table.getColumns().addAll(Nombre, Apellido, Block,Torre,Puerta);
         cargaTabla(retorno);
         cargaGrafica("",0);
     }   
