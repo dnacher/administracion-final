@@ -166,7 +166,11 @@ public class Administracion extends Application{
     public void creaFuncionesMouse(){
         //Crea las funciones cuando se hace clic
         Convenios.setOnMousePressed(mouseEvent -> {
-            cv.creaVentanaError("funcion Aun no creada", "warning");
+            try {
+                cv.crearVentanasinCSS("Convenios", "Convenios");
+            } catch (IOException ex) {
+                cv.creaVentanaError(ex.getMessage(), "error");
+            }
         });
         
         Unidades.setOnMousePressed(mouseEvent -> {try {

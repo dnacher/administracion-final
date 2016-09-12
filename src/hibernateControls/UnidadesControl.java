@@ -1,6 +1,7 @@
 package hibernateControls;
 
 import control.ConfiguracionControl;
+import control.ControlUtil;
 import control.controlXML;
 import static java.lang.Math.toIntExact;
 import java.util.ArrayList;
@@ -90,6 +91,7 @@ public class UnidadesControl {
     }
     
     public List<Unidad> TraeUnidadesXBlockTorreNoPago(String block, int torre){
+        ControlUtil cu=new ControlUtil();
         List<Unidad> lista;
        /* SessionFactory sf= NewHibernateUtil.getSessionFactory();*/
         //Session session;
@@ -99,10 +101,12 @@ public class UnidadesControl {
                                        + "AND Torre=:torre "
                                        + "AND unidad.idUnidad NOT IN (SELECT gastoscomunes.unidad "
                                                                + "FROM Gastoscomunes gastoscomunes "
-                                                               + "WHERE gastoscomunes.periodo=:periodo)");            
+                                                               + "WHERE gastoscomunes.periodo=:periodo "
+                                                               + "AND gastoscomunes.estado=est)");            
         query.setParameter("block", block);
         query.setParameter("torre", torre);
-        query.setParameter("periodo", "2016-09");
+        query.setParameter("periodo", cu.devuelvePeriodoActual());
+        query.setParameter("est", 2);
         lista=query.list();           
         session.close();       
         return lista;
@@ -175,12 +179,15 @@ public class UnidadesControl {
         Session session;*/
         Session session = SessionConnection.getConnection().useSession();
         try{                
-        Query query= session.createQuery("SELECT e1 FROM Unidad e1 "
-                                       + "WHERE e1.idUnidad NOT IN ("
-                                                                  + "SELECT e2.unidad "
-                                                                  + "FROM Gastoscomunes e2 "
-                                                                  + "WHERE e2.periodo=:periodo)");
-        query.setParameter("periodo", "2016-09");
+        Query query= session.createQuery("SELECT unidad FROM Unidad unidad "
+                                       + "WHERE unidad.idUnidad NOT IN ("
+                                                                  + "SELECT gastoscomunes.unidad "
+                                                                  + "FROM Gastoscomunes gastoscomunes "
+                                                                  + "WHERE gastoscomunes.periodo=:periodo "
+                                                                  + "AND gastoscomunes.estado=:est)");
+        ControlUtil cu= new ControlUtil();
+        query.setParameter("est", 2);
+        query.setParameter("periodo", cu.devuelvePeriodoActual());
         list= query.list();
                        
         }

@@ -36,6 +36,7 @@ public class FormularioGastosComunesController implements Initializable {
     MontosControl mc=new MontosControl();
     ConfiguracionControl cc= new ConfiguracionControl();
     GastosComunesControl gcc= new GastosComunesControl();
+    ControlVentana cv= new ControlVentana();
            
     @FXML
     private ComboBox<String> CmbMoneda;
@@ -72,7 +73,7 @@ public class FormularioGastosComunesController implements Initializable {
         try {
             unidad=ufx.devuelveUnidad(uni);
         } catch (ParseException ex) {
-           //***************Agregar Label info
+           cv.creaVentanaError(ex.getMessage(), "error");
         }
         gc.setUnidad(unidad);
         gc.setPeriodo(periodo);
@@ -87,14 +88,12 @@ public class FormularioGastosComunesController implements Initializable {
         gc.setPeriodoInt(periodoInt);
         try {
             gcc.guardarGastosComunes(gc);
-            ConfiguracionControl.ActualizaId("gastoscomunes");
-            control.ControlVentana cv= new ControlVentana();            
+            ConfiguracionControl.ActualizaId("gastoscomunes");                       
             String str="se ha cargado correctamente";                       
             cv.creaVentanaError(str, "tick");
             Cancelar(event);
         }         
         catch (Exception ex){            
-            control.ControlVentana cv= new ControlVentana();
             String str="Hubo un error al intentar guardar: " + ex.getMessage();            
             cv.creaVentanaError(str, "error");
         }            

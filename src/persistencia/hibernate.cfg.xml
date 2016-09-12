@@ -9,7 +9,7 @@
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">Punknotdead123.</property>
     <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-    <property name="hibernate.hbm2ddl.auto">update</property>
+    <!--<property name="hibernate.hbm2ddl.auto">update</property>-->
     
     <property name="hibernate.c3p0.min_size">3</property>
     <property name="hibernate.c3p0.max_size">5</property>    

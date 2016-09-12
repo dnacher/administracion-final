@@ -1,6 +1,7 @@
 package control;
 
 import java.util.Calendar;
+import java.util.Date;
 
 public class ControlUtil {
     
@@ -33,4 +34,27 @@ public class ControlUtil {
                periodo=periodo + Integer.toString(month);
            }  
    }
+    
+    public Calendar DateToCalendar(Date date){ 
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        return cal;
+    }
+    
+    public int concatenaInt(int num1, int num2){
+        String str=String.valueOf(num1) + devuelveMes(num2);
+        int retorno=Integer.parseInt(str);
+        return retorno;    
+    }
+    
+    public String devuelveMes(int mes){
+        String str;
+        if(mes<10){
+            str="0" + String.valueOf(mes);
+        }
+        else{
+            str=String.valueOf(mes);
+        }       
+        return str;
+    }  
 }

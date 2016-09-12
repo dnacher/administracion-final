@@ -1,21 +1,27 @@
 package vista;
 
 import TablasJavaFx.UnidadFx;
+import control.ConfiguracionControl;
 import control.ControlVentana;
+import hibernateControls.CotizacionesControl;
+import hibernateControls.GastosComunesControl;
+import hibernateControls.MontosControl;
 import hibernateControls.UnidadesControl;
 import java.io.IOException;
 import java.math.RoundingMode;
 import java.net.URL;
 import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.PieChart.Data;
 import javafx.scene.control.Button;
@@ -24,15 +30,15 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
+import modelo.Cotizaciones;
+import modelo.Gastoscomunes;
+import modelo.Monto;
 import modelo.Unidad;
 
 
-public class GastosComunesController implements Initializable {
+public class ConveniosController implements Initializable {
 
   @FXML
   private TableView<UnidadFx> Table; 
@@ -60,6 +66,7 @@ public class GastosComunesController implements Initializable {
   List<Unidad>list;        
   ObservableList<UnidadFx> retorno;
   UnidadFx ufx= new UnidadFx();
+  List<Gastoscomunes> listaGastosComunes=new ArrayList<>();
   
   
     @Override
@@ -96,37 +103,46 @@ public class GastosComunesController implements Initializable {
         cargaGrafica("",0);
     }   
     
-      @FXML
-    public void aceptar(ActionEvent event) throws IOException {
-     
-        //devuelve lista de cotizaciones del usuario, funciona bien
-        /*  CotizacionesControl cco= new CotizacionesControl();
-        UnidadFx unifx = Table.getSelectionModel().getSelectedItem();
-        Unidad uni=null;        
-      try {
-          uni = unifx.devuelveUnidad(unifx);
-      } catch (ParseException ex) {
-          System.out.println(ex.getMessage());
-      }
-        List<Cotizaciones>list=cco.TraePeriodosSinPagarUsuario(uni);
-        for(Cotizaciones c: list){
-            System.out.println(c.toString());
-        }*/
-        
+    @FXML
+    public void aceptar(ActionEvent event) throws IOException {      
         LblInfo.setText("");
-        UnidadFx uni = Table.getSelectionModel().getSelectedItem();
-        if(uni!=null){
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/FormularioGastosComunes.fxml"));
-        Stage stage = new Stage(StageStyle.DECORATED);
-        stage.getIcons().add(new Image("/vista/imagenes/convenios.png"));
-        stage.setScene(
-        new Scene((Pane) loader.load()));
-        FormularioGastosComunesController controller = 
-        loader.<FormularioGastosComunesController>getController();
-        controller.initData(uni);
-        stage.showAndWait();
-        MostrarTodos(event);
-        cargaGrafica("",0);
+        Unidad uni=null;
+        ufx = Table.getSelectionModel().getSelectedItem();
+        if(ufx!=null){
+            CotizacionesControl cco= new CotizacionesControl();
+            UnidadFx unifx = Table.getSelectionModel().getSelectedItem();               
+            try {         
+                uni = unifx.devuelveUnidad(ufx);
+            } 
+            catch (ParseException ex) {
+                System.out.println(ex.getMessage());
+            }
+            List<Cotizaciones>list=cco.TraePeriodosSinPagarUsuario(uni);
+            MontosControl mc= new MontosControl();
+            
+            int id=ConfiguracionControl.traeUltimoId("gastoscomunes");
+            for(Cotizaciones c: list){
+                Gastoscomunes gc=new Gastoscomunes();
+                gc.setIdGastosComunes(id);
+                gc.setBonificacion(false);
+                gc.setEstado(1);
+                gc.setMonto(mc.TraeMontoPesos());
+                gc.setMonto_1(c.getCotizacion());
+                gc.setPeriodo(c.getPeriodo());
+                gc.setPeriodoInt(c.getPeriodoInt());
+                gc.setUnidad(uni);
+                listaGastosComunes.add(gc);
+                System.out.println(c.toString());
+                id++;
+            }
+            GastosComunesControl gcc= new GastosComunesControl();
+                try {
+                    ConfiguracionControl.ActualizaIdXId("gastoscomunes", id);
+                    gcc.guardarListaGastosComunes(listaGastosComunes);
+                } catch (Exception ex) {
+                    cv.creaVentanaError(ex.getMessage(), "error");
+                }
+            System.out.println("----------------------");
         }
         else{
             LblInfo.setText("Debe seleccionar una Unidad");

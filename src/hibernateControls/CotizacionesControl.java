@@ -1,5 +1,7 @@
 package hibernateControls;
 
+import control.ControlUtil;
+import java.util.Calendar;
 import java.util.List;
 import modelo.Cotizaciones;
 import modelo.Unidad;
@@ -48,15 +50,20 @@ public class CotizacionesControl {
         /*SessionFactory sf= NewHibernateUtil.getSessionFactory();
         Session session;
         session = SessionConnection.getConnection().useSession();*/
+        ControlUtil cu= new ControlUtil();
+        Calendar cal=cu.DateToCalendar(unidad.getFechaIngreso());        
+        int per=cu.concatenaInt(cal.get(Calendar.YEAR), (cal.get(Calendar.MONTH)+1));        
         Session session=SessionConnection.getConnection().useSession();
         Query query= session.createQuery("SELECT cotizaciones FROM Cotizaciones cotizaciones "
-                                       + "WHERE cotizaciones.periodo "
+                                       + "WHERE cotizaciones.periodoInt>=:periodo and "
+                                       + "cotizaciones.periodo "
                                        + "NOT IN (SELECT gastoscomunes.periodo "
                                                + "FROM Gastoscomunes gastoscomunes "
                                                + "WHERE gastoscomunes.unidad=:unidad)"); 
         query.setParameter("unidad", unidad);
+        query.setParameter("periodo", per);
         lista=query.list();           
         session.close();       
         return lista;
-    }
+    }  
 }

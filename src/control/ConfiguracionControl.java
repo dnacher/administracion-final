@@ -16,13 +16,11 @@ import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import persistencia.NewHibernateUtil;
 
 public class ConfiguracionControl {
 
-    LoginControl                        lc=new LoginControl();
+    LoginControl lc=new LoginControl();
     
     public static int traeUltimoId(String tabla){
         Configuracion c;
