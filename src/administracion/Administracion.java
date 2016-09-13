@@ -1,5 +1,8 @@
 package administracion;
 
+import traynotification.notification.Notification;
+import traynotification.notification.Notifications;
+import traynotification.notification.TrayNotification;
 import control.ConfiguracionControl;
 import control.ControlVentana;
 import eu.hansolo.enzo.common.SymbolType;
@@ -34,6 +37,7 @@ import javafx.scene.image.Image;
 import modelo.Usuario;
 import control.LoginControl;
 import javafx.event.ActionEvent;
+import javafx.util.Duration;
 
 public class Administracion extends Application{
    
@@ -218,7 +222,7 @@ public class Administracion extends Application{
        
     }
     
-    private void Login(){  
+    private void Login(){
         LoginControl lc= new LoginControl();
             Usuario usu=lc.Login(TxtUsuario.getText(), TxtPassword.getText());
             if(usu!=null){                    

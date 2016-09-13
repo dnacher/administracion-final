@@ -35,7 +35,9 @@ public class UnidadesControl {
             throw new Exception(ex);
         }
         finally{
+            if(session.isOpen()){
             session.close();
+            }
         }
     }
     

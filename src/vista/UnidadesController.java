@@ -18,7 +18,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.stage.Stage;
 
-
 public class UnidadesController implements Initializable {
 
     @FXML
@@ -63,6 +62,7 @@ public class UnidadesController implements Initializable {
     ControlVentana cv= new ControlVentana();
   
     public void Aceptar(ActionEvent event) {
+     
         try{
             Unidad uni; 
             if(validaDatos()){
@@ -83,7 +83,8 @@ public class UnidadesController implements Initializable {
                 ConfiguracionControl.ActualizaId("Unidad");
                 LblInfo.setText("Guardado correctamente");  
                 limpiarForm();
-                cv.creaVentanaError("Se ha creado correctamente", "information");
+                cv.creaVentanaError("Se ha creado correctamente", "information"); 
+                cv.creaVentanaNotificacion("Correcto","Se ha cargado Correctamente", 1,"tick");
             }
             else{
                 LblInfo.setText("Ya existe un usuario en ese apartamento activo");        

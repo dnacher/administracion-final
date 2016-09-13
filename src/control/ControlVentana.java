@@ -10,6 +10,10 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
+import traynotification.notification.Notification;
+import traynotification.notification.Notifications;
+import traynotification.notification.TrayNotification;
 import vista.MensajeController;
 
 public class ControlVentana {
@@ -53,6 +57,37 @@ public class ControlVentana {
          MensajeController controller = loader.<MensajeController>getController();
         controller.initData(mensaje, imagen);
         stage.show();
-     }  
+     } 
+     
+     public void creaVentanaNotificacion(String titulo, String mensaje, int segundosMensaje, String icono){
+        Notification Notif=traeIcono(icono);
+        TrayNotification tn=new TrayNotification(titulo, mensaje, Notif);
+        tn.showAndDismiss(Duration.seconds(segundosMensaje));
+     }
+     
+     public Notification traeIcono(String icono){
+         Notification notif;
+         switch(icono){
+            case "error":
+              notif=Notifications.ERROR;
+              break;  
+            case "information":
+              notif=Notifications.INFORMATION;
+              break; 
+            case "question":
+              notif=Notifications.QUESTION;
+              break;  
+            case "warning":
+              notif=Notifications.WARNING;
+              break;  
+            case "tick":
+              notif=Notifications.SUCCESS;
+              break; 
+            default:
+              notif=Notifications.ERROR;
+              break;          
+         }
+         return notif;
+     }
     
 }

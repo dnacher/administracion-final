@@ -32,8 +32,7 @@ public class MensajeController implements Initializable {
 
     public void initData(String mensaje, String imagen) {
         TxtInformation.setText(mensaje);
-        try{
-        //Image img= new Image(TraeIcono(imagen));        
+        try{              
             Image img=TraeIcono(imagen);
         LblImage.setImage(img);                
         }

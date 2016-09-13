@@ -90,8 +90,7 @@ public class CotizacionesController implements Initializable {
         CmbAnioInicial.getSelectionModel().select("2016");
         CmbAnioFinal.getSelectionModel().select("2016");
         CmbMesFinal.getSelectionModel().select("09");
-        CmbMesInicial.getSelectionModel().select("01");
-        
+        CmbMesInicial.getSelectionModel().select("01");        
     }    
     
     public void cargaComboAnio(){
@@ -117,6 +116,5 @@ public class CotizacionesController implements Initializable {
         }        
         CmbMesFinal.setItems(list);
         CmbMesInicial.setItems(list);
-    }
-    
+    }   
 }
