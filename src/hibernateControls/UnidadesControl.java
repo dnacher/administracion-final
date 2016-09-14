@@ -20,7 +20,8 @@ public class UnidadesControl {
     
     public void guardarUnidad(Unidad unidad)throws Exception{ 
         /*SessionFactory sf= NewHibernateUtil.getSessionFactory();
-        Session session;*/
+        Session session;
+        session = sf.openSession(); */
         Session session = SessionConnection.getConnection().useSession();
         try{
             if(permitido(unidad, session)){                 
@@ -30,8 +31,8 @@ public class UnidadesControl {
                 ConfiguracionControl.ActualizaId("Unidad");
             }
             else{
-                //UnidadYaAgregadaException ex= new UnidadException("Ya existe una unidad activa para este block, torre, puerta");
-                Exception ex= new Exception("Ya existe una unidad activa para este block, torre, puerta");
+                UnidadException ex= new UnidadException("Ya existe una unidad activa para este block, torre, puerta");
+                //Exception ex= new Exception("Ya existe una unidad activa para este block, torre, puerta");
                 throw new Exception(ex);
             }
         }
@@ -40,7 +41,7 @@ public class UnidadesControl {
         }
         finally{
             if(session.isOpen()){
-            session.close();
+            session.close();            
             }
         }
     }
