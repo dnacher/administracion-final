@@ -14,6 +14,7 @@ import javafx.util.Duration;
 import traynotification.notification.Notification;
 import traynotification.notification.Notifications;
 import traynotification.notification.TrayNotification;
+
 import vista.MensajeController;
 
 public class ControlVentana {

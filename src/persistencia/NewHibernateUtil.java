@@ -13,9 +13,9 @@ public class NewHibernateUtil {
     private static ServiceRegistry serviceRegistrry;    
         
     static {
-        try {
-            File f=new File("C:\\Users\\Dani-Fla-Mathi\\Documents\\NetBeansProjects\\Administracion\\src\\persistencia\\hibernate.cfg.xml");
-            Configuration cfg= new Configuration().configure(f);            
+        try {            
+            File file=new File("src/persistencia/hibernate.cfg.xml");
+            Configuration cfg= new Configuration().configure(file);            
             StandardServiceRegistryBuilder sb= new StandardServiceRegistryBuilder();
             sb.applySettings(cfg.getProperties());
             StandardServiceRegistry standardServiceRegistry= sb.build();

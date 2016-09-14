@@ -1,25 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-configuration PUBLIC 
-"-//Hibernate/Hibernate Configuration DTD 3.0//EN" 
-"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
-  <session-factory>    
+  <session-factory>
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
     <property name="hibernate.connection.url">jdbc:mysql://192.168.1.46:3306/administracion</property>
     <!--?zeroDateTimeBehavior=convertToNull-->
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">Punknotdead123.</property>
     <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="hibernate.temp.use_jdbc_metadata_defaults">false</property>
     <!--<property name="hibernate.hbm2ddl.auto">update</property>-->
-    
     <property name="hibernate.c3p0.min_size">3</property>
-    <property name="hibernate.c3p0.max_size">5</property>    
+    <property name="hibernate.c3p0.max_size">5</property>
     <property name="hibernate.c3p0.timeout">100</property>
-    <property name="hibernate.c3p0.max_statements">50</property>    
+    <property name="hibernate.c3p0.max_statements">50</property>
     <property name="hibernate.c3p0.idle_test_period">120</property>
-    <!---->    
-    
-    
+    <!---->
     <mapping resource="modelo/Tipobonificacion.hbm.xml"/>
     <mapping resource="modelo/Tipousuario.hbm.xml"/>
     <mapping resource="modelo/Usuario.hbm.xml"/>

@@ -3,6 +3,7 @@ package hibernateControls;
 import control.ConfiguracionControl;
 import control.ControlUtil;
 import control.controlXML;
+import exceptions.UnidadException;
 import static java.lang.Math.toIntExact;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,13 +23,16 @@ public class UnidadesControl {
         Session session;*/
         Session session = SessionConnection.getConnection().useSession();
         try{
-            if(!UnidadConstrain(unidad, session)){
-                
-                Transaction tx= session.beginTransaction(); 
+            if(permitido(unidad, session)){                 
+                Transaction tx=session.beginTransaction(); 
                 session.save(unidad); 
                 tx.commit();
-                
                 ConfiguracionControl.ActualizaId("Unidad");
+            }
+            else{
+                //UnidadYaAgregadaException ex= new UnidadException("Ya existe una unidad activa para este block, torre, puerta");
+                Exception ex= new Exception("Ya existe una unidad activa para este block, torre, puerta");
+                throw new Exception(ex);
             }
         }
         catch(Exception ex){
@@ -74,18 +78,18 @@ public class UnidadesControl {
         }
     }
     
-    public boolean permitido(Unidad uni){
+   public boolean permitido(Unidad uni, Session session){
         boolean permitido= true;
         /*SessionFactory sf= NewHibernateUtil.getSessionFactory();
         Session session;*/
-        Session session = SessionConnection.getConnection().useSession();
+        //Session session = SessionConnection.getConnection().useSession();
         Query query= session.createQuery("from Unidad where Block=:block and Torre=:torre and Puerta=:puerta and Activo=:activo");            
         query.setParameter("block", uni.getBlock());
         query.setParameter("torre", uni.getTorre());
         query.setParameter("puerta", uni.getPuerta());
         query.setParameter("activo", uni.getActivo());
         Unidad unidad=(Unidad)query.uniqueResult();           
-        session.close();
+        //session.close();
         if(unidad!=null){
             permitido=false;
         }

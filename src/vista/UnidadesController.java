@@ -77,22 +77,20 @@ public class UnidadesController implements Initializable {
                             PropietarioInquilino(CmbPropietarioInquilino.getValue()),
                             ConfiguracionControl.TraeFecha(CmbFecha.getValue()),
                             ActivoInactivo(CmbActivo.getValue()));
-            UnidadesControl uc=new UnidadesControl();            
-            if(uc.permitido(uni)){
+                UnidadesControl uc=new UnidadesControl();                       
                 uc.guardarUnidad(uni);
                 ConfiguracionControl.ActualizaId("Unidad");
                 LblInfo.setText("Guardado correctamente");  
                 limpiarForm();
                 cv.creaVentanaError("Se ha creado correctamente", "information"); 
-                cv.creaVentanaNotificacion("Correcto","Se ha cargado Correctamente", 1,"tick");
-            }
-            else{
-                LblInfo.setText("Ya existe un usuario en ese apartamento activo");        
-            }
+                cv.creaVentanaNotificacion("Correcto","Se ha cargado Correctamente", 1,"tick");            
             }            
-            }
+        }
         catch(Exception ex){ 
-            System.out.println(ex.getMessage());
+            String error=ex.getMessage();
+            cv.creaVentanaError(error, "error"); 
+            cv.creaVentanaNotificacion("Error",error, 3,"error");
+            LblInfo.setText("Error al guardar "+ex.getMessage()); 
         }       
     }
     
