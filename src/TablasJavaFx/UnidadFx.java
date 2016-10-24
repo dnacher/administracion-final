@@ -156,10 +156,8 @@ public class UnidadFx {
         
             UnidadFx fx=new UnidadFx(u);
             li.add(fx);
-        }
-        
-        ObservableList<UnidadFx> retorno = FXCollections.observableList(li);
-       
+        }        
+        ObservableList<UnidadFx> retorno = FXCollections.observableList(li);       
         return retorno;
      }
      

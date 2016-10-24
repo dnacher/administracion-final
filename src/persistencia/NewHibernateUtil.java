@@ -1,6 +1,6 @@
 package persistencia;
 
-import java.io.File;
+import java.net.URL;
 import javax.imageio.spi.ServiceRegistry;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistry;
@@ -14,8 +14,8 @@ public class NewHibernateUtil {
         
     static {
         try {            
-            File file=new File("src/persistencia/hibernate.cfg.xml");
-            Configuration cfg= new Configuration().configure(file);            
+            URL resource = NewHibernateUtil.class.getResource("hibernate.cfg.xml");
+            Configuration cfg= new Configuration().configure(resource);          
             StandardServiceRegistryBuilder sb= new StandardServiceRegistryBuilder();
             sb.applySettings(cfg.getProperties());
             StandardServiceRegistry standardServiceRegistry= sb.build();

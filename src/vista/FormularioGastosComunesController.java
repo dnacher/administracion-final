@@ -25,7 +25,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import modelo.Gastoscomunes;
 import modelo.Unidad;
-import eu.hansolo.enzo.notification.*;
 
 public class FormularioGastosComunesController implements Initializable {
     
